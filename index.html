@@ -1,0 +1,1550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kogan | Elite Collection Registry</title>
+
+<link id="dynamicFavicon" rel="icon" type="image/png" href="https://via.placeholder.com/32">
+
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root, [data-theme="dark"] {
+  --bg: #06060c;
+  --panel: #0d0d15;
+  --panel-glass: rgba(13, 13, 21, 0.8);
+  --text: #ffffff;
+  --text-secondary: #94a3b8;
+  --muted: #64748b;
+  --border: #1e1e30;
+  --accent: #6366f1; 
+  --accent-glow: rgba(99, 102, 241, 0.15);
+  --card-bg: #0f0f1a;
+  --card-hover-border: #6366f1;
+  --badge-bg: rgba(99, 102, 241, 0.1);
+  --badge-text: #818cf8;
+  --input-bg: #131322;
+  --ambient-gradient: radial-gradient(circle at 50% 0%, #13122b 0%, #06060c 60%);
+}
+
+[data-theme="light"] {
+  --bg: #f8fafc;
+  --panel: #ffffff;
+  --panel-glass: rgba(255, 255, 255, 0.85);
+  --text: #0f172a;
+  --text-secondary: #475569;
+  --muted: #94a3b8;
+  --border: #e2e8f0;
+  --accent: #6366f1;
+  --accent-glow: rgba(99, 102, 241, 0.08);
+  --card-bg: #ffffff;
+  --card-hover-border: #6366f1;
+  --badge-bg: #f1f5f9;
+  --badge-text: #4f46e5;
+  --input-bg: #f1f5f9;
+  --ambient-gradient: radial-gradient(circle at 50% 0%, #e0e7ff 0%, #f8fafc 60%);
+}
+
+* {
+  box-sizing: border-box;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+body {
+  margin: 0;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  color: var(--text);
+  background: var(--ambient-gradient);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+.app-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  background: var(--panel-glass);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  z-index: 1000;
+}
+
+.logo {
+  font-weight: 700;
+  letter-spacing: 4px;
+  font-size: 18px;
+  background: linear-gradient(135deg, var(--text) 40%, var(--muted) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-decoration: none;
+}
+
+.desktop-menu {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.desktop-menu a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.desktop-menu a:hover {
+  color: var(--accent);
+}
+
+.nav-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.lang-selector {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 8px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 6px;
+  outline: none;
+  cursor: pointer;
+
+  width: 120px; /* Reduce Width */
+}
+
+.control-btn {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  color: var(--text);
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.control-btn:hover {
+  border-color: var(--accent);
+  background: var(--accent-glow);
+}
+
+.cta-button {
+  background: var(--accent);
+  color: #ffffff;
+  border: none;
+  padding: 10px 18px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.25);
+}
+
+.cta-button:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.mobile-menu-trigger {
+  display: none;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: -340px;
+  width: 280px;
+  height: 100%;
+  background: var(--panel);
+  border-left: 1px solid var(--border);
+  padding: 40px 30px;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 2000;
+}
+
+.sidebar.active {
+  transform: translateX(-340px);
+}
+
+body[dir="rtl"] .sidebar {
+  right: auto;
+  left: -340px;
+  border-left: none;
+  border-right: 1px solid var(--border);
+}
+
+body[dir="rtl"] .sidebar.active {
+  transform: translateX(340px);
+}
+
+.sidebar .close-drawer {
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  font-size: 20px;
+  cursor: pointer;
+  margin-bottom: 30px;
+  padding: 0;
+}
+
+.sidebar a {
+  display: block;
+  color: var(--text);
+  text-decoration: none;
+  margin: 20px 0;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.editorial-section {
+  margin: 60px auto 40px auto;
+  text-align: center;
+  max-width: 800px;
+}
+
+.editorial-section h1 {
+  font-size: 42px;
+  font-weight: 700;
+  letter-spacing: -1px;
+  margin: 0 0 20px 0;
+  line-height: 1.2;
+}
+
+.editorial-section p {
+  color: var(--text-secondary);
+  font-size: 16px;
+  line-height: 1.6;
+  margin: 0;
+  font-weight: 400;
+}
+
+.filter-hub {
+  margin: 0 auto 40px auto;
+  max-width: 500px;
+  text-align: center;
+}
+
+.filter-hub h2 {
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+
+.search-container input {
+  width: 100%;
+  padding: 14px 20px;
+  background: var(--input-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 14px;
+  outline: none;
+  text-align: center;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+}
+
+.search-container input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-glow);
+}
+
+.grid-frame {
+  margin-bottom: 40px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  cursor: pointer;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+.card:hover {
+  border-color: var(--card-hover-border);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12), 0 0 0 1px var(--accent);
+}
+
+.card-img-frame {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: #f1f5f9;
+  overflow: hidden;
+  position: relative;
+  border-radius: 16px 16px 0 0;
+}
+
+[data-theme="dark"] .card-img-frame {
+  background: #090911;
+}
+
+.card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card:hover img {
+  transform: scale(1.05);
+}
+
+.card-body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 8px;
+}
+
+.card-badge {
+  display: inline-block;
+  align-self: flex-start;
+  background: var(--badge-bg);
+  color: var(--badge-text);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.title {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--text);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  height: 38px;
+}
+
+.rating-stars {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  color: #fbbf24;
+  font-size: 12px;
+}
+
+.rating-count {
+  color: var(--muted);
+  font-size: 12px;
+  margin-left: 4px;
+}
+
+body[dir="rtl"] .rating-count {
+  margin-left: 0;
+  margin-right: 4px;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+
+.price {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.view-action-btn {
+  background: var(--badge-bg);
+  color: var(--badge-text);
+  border: none;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.card:hover .view-action-btn {
+  background: var(--accent);
+  color: #ffffff;
+}
+
+.skeleton-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  aspect-ratio: 1 / 1.4;
+  position: relative;
+  overflow: hidden;
+}
+
+.skeleton-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.04), transparent);
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.load-status {
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+  padding: 20px 0 60px 0;
+}
+
+/* Floating Actions Interactive Layout Control Modules */
+.floating-support-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 50px;
+  height: 50px;
+  background: var(--panel-glass);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text);
+  z-index: 1000;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+
+.floating-support-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-3px);
+}
+
+/* High-End Scroll To Top Control Unit Component Module */
+.scroll-top-btn {
+  position: fixed;
+  bottom: 86px; /* Sits perfectly clean directly above support icon module */
+  right: 24px;
+  width: 50px;
+  height: 50px;
+  background: var(--panel-glass);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text);
+  z-index: 1000;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  cursor: pointer;
+  transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+.scroll-top-btn.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.scroll-top-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+body[dir="rtl"] .floating-support-btn,
+body[dir="rtl"] .scroll-top-btn {
+  right: auto;
+  left: 24px;
+}
+
+/* Premium Footer Layout Assembly (Matching Reference Image Layout) */
+.footer-matrix {
+  background: #040408;
+  border-top: 1px solid var(--border);
+  padding: 60px 0 30px 0;
+  margin-top: 40px;
+}
+
+[data-theme="light"] .footer-matrix {
+  background: #ffffff;
+}
+
+.footer-columns {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+@media (min-width: 1024px) {
+  .footer-columns {
+    grid-template-columns: 2fr repeat(4, 1fr);
+  }
+}
+
+.footer-brand-column p {
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 16px 0;
+  max-width: 300px;
+}
+
+.footer-socials {
+  display: flex;
+  gap: 12px;
+}
+
+.footer-social-icon {
+  width: 36px;
+  height: 36px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  text-decoration: none;
+}
+
+.footer-social-icon:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.footer-group h3 {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  margin: 0 0 20px 0;
+  color: var(--text);
+}
+
+.footer-group ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-group ul li {
+  margin-bottom: 12px;
+}
+
+.footer-group ul li a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.footer-group ul li a:hover {
+  color: var(--accent);
+}
+
+.footer-base {
+  border-top: 1px solid var(--border);
+  padding-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .footer-base {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.footer-copy {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.footer-base-links {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.footer-base-links a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 13px;
+}
+
+.footer-base-links a:hover {
+  color: var(--accent);
+}
+
+@media (max-width: 1023px) {
+  .desktop-menu { display: none; }
+  .mobile-menu-trigger { display: flex; }
+  .editorial-section h1 { font-size: 28px; }
+  .editorial-section p { font-size: 14px; }
+}
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <a href="#" class="logo">KOGAN</a>
+
+  <div class="desktop-menu">
+    <a href="products-list.html" data-i18n="nav_all">All Products</a>
+    <a href="terms.html" data-i18n="nav_terms">Terms & Conditions</a>
+    <a href="support.html" data-i18n="nav_contact">Contact Us</a>
+  </div>
+
+  <div class="nav-controls">
+    <select class="lang-selector" id="langSelect" onchange="switchLanguage(this.value)">
+      <option value="en">English</option>
+           <option value="hi">हिन्दी</option>
+      <option value="fr">Français</option>
+           <option value="ar">العربية</option>
+      <option value="de">Deutsch / German</option>
+<option value="pt">Português (Portuguese)</option>
+<option value="ru">Русский (Russian)</option>
+<option value="it">Italiano (Italian)</option>
+<option value="es">Español (Spanish)</option>
+<option value="fa">فارسی (Farsi/Persian)</option>
+<option value="zh">中文 (Chinese)</option>
+<option value="he">עברית (Hebrew)</option>
+<option value="ko">한국어 (Korean)</option>
+
+    </select>
+
+    <button class="control-btn" onclick="toggleThemeEngine()" aria-label="Toggle Theme">
+      <svg id="themeIcon" viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+      </svg>
+    </button>
+
+    <a href="auth.html" class="cta-button desktop-menu" data-i18n="nav_seller">Become A Seller</a>
+    <button class="control-btn mobile-menu-trigger" onclick="toggleMenuDrawer()" aria-label="Open Navigation">☰</button>
+  </div>
+</div>
+
+<div class="sidebar" id="sidebar">
+  <button class="close-drawer" onclick="toggleMenuDrawer()">✕</button>
+  <a href="products-list.html" data-i18n="nav_all">All Products</a>
+  <a href="terms.html" data-i18n="nav_terms">Terms & Conditions</a>
+  <a href="auth.html" data-i18n="nav_seller_earn">Become A Seller And Earn</a>
+  <a href="support.html" data-i18n="nav_contact">Contact Us</a>
+</div>
+
+<div class="app-container">
+  <div class="editorial-section">
+    <h1 data-i18n="hero_title">Complete Modern Online Marketplace</h1>
+    <p data-i18n="hero_desc">Kogan Store Is A Modern Online Marketplace Offering Electronics, Phones, Plants, Home Items, And More. It Provides A Fast, Simple, And Reliable Shopping Experience With Quality Products At Affordable Prices.</p>
+  </div>
+
+  <div class="filter-hub">
+    <h2 data-i18n="section_title">Our Products</h2>
+    <div class="search-container">
+      <input type="text" id="search" placeholder="Search product registry..." oninput="handleSearchInput()" data-i18n-holder="search_placeholder">
+    </div>
+  </div>
+
+  <div class="grid-frame">
+    <div class="grid" id="grid">
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+    </div>
+  </div>
+  
+  <div class="load-status" id="loadStatus"></div>
+</div>
+
+<div class="scroll-top-btn" id="scrollTopBtn" onclick="scrollToTopHead()" aria-label="Scroll to top">
+  <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="12" y1="19" x2="12" y2="5"></line>
+    <polyline points="5 12 12 5 19 12"></polyline>
+  </svg>
+</div>
+
+<a href="support.html" class="floating-support-btn" aria-label="Support Matrix">
+  <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+  </svg>
+</a>
+
+<footer class="footer-matrix">
+  <div class="app-container">
+    <div class="footer-columns">
+      <div class="footer-brand-column">
+        <a href="#" class="logo">KOGAN</a>
+        <p data-i18n="foot_brand_desc">Your global marketplace aggregator. Discover the best deals across Amazon, Alibaba, AliExpress, and 12+ more platforms.</p>
+        <div class="footer-socials">
+                   <a href="support.html" class="footer-social-icon">E</a>
+          <a href="support.html" class="footer-social-icon">T</a>
+        </div>
+      </div>
+      
+     
+
+   
+      <div class="footer-group">
+        <h3 data-i18n="foot_h_support">Support</h3>
+        <ul>
+          <li><a href="support.html" data-i18n="foot_help">Help Center</a></li>
+          <li><a href="support.html" data-i18n="foot_tele">Telegram Chat</a></li>
+          <li><a href="support.html" data-i18n="foot_email">Email Support</a></li>
+          <li><a href="support.html" data-i18n="foot_issue">Report Issue</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-group">
+        <h3 data-i18n="foot_h_legal">Legal</h3>
+        <ul>
+          <li><a href="terms.html" data-i18n="foot_privacy">Privacy Policy</a></li>
+          <li><a href="terms.html" data-i18n="foot_terms">Terms of Service</a></li>
+          <li><a href="terms.html" data-i18n="foot_cookie">Cookie Policy</a></li>
+          <li><a href="terms.html" data-i18n="foot_disclaim">Disclaimer</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-base">
+      <div class="footer-copy" id="footerCopyright">© 2026 Kogan Store. All rights reserved. Product links are affiliate redirects to official marketplaces.</div>
+      <div class="footer-base-links">
+        <a href="auth.html" data-i18n="foot_signin">Sign In / Sign Up</a>
+      
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getDatabase, ref, get, query, orderByKey, limitToLast, endBefore, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBfNKnkuPjWCO-KnqvZrfmrbfC44K0xOY8",
+  authDomain: "koganstoree.firebaseapp.com",
+  databaseURL: "https://koganstoree-default-rtdb.firebaseio.com",
+  projectId: "koganstoree",
+  storageBucket: "koganstoree.firebasestorage.app",
+  messagingSenderId: "166010280262",
+  appId: "1:166010280262:web:a29c6fc7b8251c9997ed47"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+const grid = document.getElementById("grid");
+const loadStatus = document.getElementById("loadStatus");
+const scrollTopBtn = document.getElementById("scrollTopBtn");
+
+// Runtime Memory Matrices
+let displayedProducts = [];
+let allDatabaseProducts = []; 
+let lastLoadedKey = null;
+let currentLang = "en";
+let searchDebounceTimeout = null;
+let isFetchingBackground = false;
+let fullyLoaded = false;
+
+const dictionary = {
+  en: {
+    nav_all: "All Products",
+    nav_terms: "Terms & Conditions",
+    nav_contact: "Contact Us",
+    nav_seller: "Become A Seller",
+    nav_seller_earn: "Become A Seller And Earn",
+    hero_title: "Complete Modern Online Marketplace",
+    hero_desc: "Kogan Store Is A Modern Online Marketplace Offering Electronics, Phones, Plants, Home Items, And More. It Provides A Fast, Simple, And Reliable Shopping Experience With Quality Products At Affordable Prices.",
+    section_title: "Our Products",
+    search_placeholder: "Search product registry...",
+    empty_msg: "Database register is empty.",
+    zero_match: "Zero items matching search index.",
+    error_db: "Database connection interrupted.",
+    view_btn: "View",
+    loading_more: "Loading spectacular items...",
+    all_loaded: "Showing all available products",
+    foot_brand_desc: "Your global marketplace aggregator. Discover the best deals across Amazon, Alibaba, AliExpress, and 12+ more platforms.",
+    foot_h_company: "Company",
+    foot_about: "About Us",
+    foot_works: "How It Works",
+    foot_careers: "Careers",
+    foot_press: "Press",
+    foot_h_market: "Marketplaces",
+    foot_h_support: "Support",
+    foot_help: "Help Center",
+    foot_tele: "Telegram Chat",
+    foot_email: "Email Support",
+    foot_issue: "Report Issue",
+    foot_h_legal: "Legal",
+    foot_privacy: "Privacy Policy",
+    foot_terms: "Terms of Service",
+    foot_cookie: "Cookie Policy",
+    foot_disclaim: "Disclaimer",
+    foot_signin: "Sign In / Sign Up",
+    foot_copyright: "© 2026 Kogan Store. All rights reserved. Product links are affiliate redirects to official marketplaces."
+  },
+  ur: {
+    nav_all: "تمام پروڈکٹس",
+    nav_terms: "شرائط و ضوابط",
+    nav_contact: "ہم سے رابطہ کریں",
+    nav_seller: "سیلر بنیں",
+    nav_seller_earn: "سیلر بنیں اور کمائیں",
+    hero_title: "مکمل جدید آن لائن مارکیٹ پلیس",
+    hero_desc: "کوگن اسٹور ایک جدید آن لائن مارکیٹ پلیس ہے جو الیکٹرانکس، فونز، پودے، گھریلو اشیاء اور بہت کچھ پیش کرتا ہے۔ یہ سستی قیمتوں پر معیاری مصنوعات کے ساتھ تیز، سادہ اور قابل اعتماد خریداری کا تجربہ فراہم کرتا ہے۔",
+    section_title: "ہماری مصنوعات",
+    search_placeholder: "پروڈکٹ رجسٹری تلاش کریں...",
+    empty_msg: "ڈیٹا بیس رجسٹری خالی ہے۔",
+    zero_match: "تلاش کے انڈیکس سے کوئی چیز مطابقت نہیں رکھتی۔",
+    error_db: "ڈیٹا بیس کنکشن منقطع ہو گیا۔",
+    view_btn: "دیکھیں",
+    loading_more: "مزید شاندار مصنوعات لوڈ ہو رہی ہیں...",
+    all_loaded: "تمام دستیاب مصنوعات دکھائی جا رہی ہیں",
+    foot_brand_desc: "آپ کا عالمی مارکیٹ پلیس ایگریگیٹر۔ ایمیزون، علی بابا، علی ایکسپریس اور 12 سے زیادہ پلیٹ فارمز پر بہترین سودے تلاش کریں۔",
+    foot_h_company: "کمپنی",
+    foot_about: "ہمارے بارے میں",
+    foot_works: "یہ کیسے کام کرتا ہے",
+    foot_careers: "ملازمتیں",
+    foot_press: "پریس",
+    foot_h_market: "مارکیٹ پلیسز",
+    foot_h_support: "سپورٹ",
+    foot_help: "امدادی مرکز",
+    foot_tele: "ٹیلی گرام چیٹ",
+    foot_email: "ای میل سپورٹ",
+    foot_issue: "مسئلے کی رپورٹ کریں",
+    foot_h_legal: "قانونی",
+    foot_privacy: "رازداری کی پالیسی",
+    foot_terms: "سروس کی شرائط",
+    foot_cookie: "کوکی پالیسی",
+    foot_disclaim: "دستبرداری",
+    foot_signin: "سائن ان / سائن اپ",
+    foot_copyright: "© 2026 کوگن اسٹور۔ جملہ حقوق محفوظ ہیں۔ پروڈکٹ لنکس آفیشل مارکیٹ پلیسز کے الحاق شدہ ریڈائریکٹس ہیں۔"
+  },
+  hi: {
+    nav_all: "सभी उत्पाद",
+    nav_terms: "नियम और शर्तें",
+    nav_contact: "संपर्क करें",
+    nav_seller: "विक्रेता बनें",
+    nav_seller_earn: "विक्रेता बनें और कमाएं",
+    hero_title: "पूर्ण आधुनिक ऑनलाइन मार्केटप्लेस",
+    hero_desc: "कोगन स्टोर एक आधुनिक ऑनलाइन मार्केटप्लेस है जो इलेक्ट्रॉनिक्स, फोन, पौधे, घरेलू सामान और बहुत कुछ प्रदान करता है। यह सस्ती कीमतों पर गुणवत्तापूर्ण उत्पादों के साथ एक तेज़, सरल और विश्वसनीय खरीदारी का अनुभव प्रदान करता है।",
+    section_title: "हमारे उत्पाद",
+    search_placeholder: "उत्पाद खोजें...",
+    empty_msg: "डेटाबेस खाली है।",
+    zero_match: "खोज इंडेक्स से कोई उत्पाद नहीं मिला।",
+    error_db: "डेटाबेस कनेक्शन बाधित हुआ।",
+    view_btn: "देखें",
+    loading_more: "और उत्पाद लोड हो रहे हैं...",
+    all_loaded: "सभी उपलब्ध उत्पाद दिखाए जा रहे हैं",
+    foot_brand_desc: "आपका वैश्विक बाज़ार एग्रीगेटर। अमेज़ॅन, अलीबाबा, अलीएक्सप्रेस और 12+ अधिक प्लेटफार्मों पर सर्वोत्तम सौदे खोजें।",
+    foot_h_company: "कंपनी",
+    foot_about: "हमारे बारे में",
+    foot_works: "यह कैसे काम करता है",
+    foot_careers: "करियर",
+    foot_press: "प्रेस",
+    foot_h_market: "मार्केटप्लेस",
+    foot_h_support: "सहायता",
+    foot_help: "सहायता केंद्र",
+    foot_tele: "टेलीग्राम चैट",
+    foot_email: "ईमेल सहायता",
+    foot_issue: "समस्या की रिपोर्ट करें",
+    foot_h_legal: "कानूनी",
+    foot_privacy: "गोपनीयता नीति",
+    foot_terms: "सेवा की शर्तें",
+    foot_cookie: "कुकी नीति",
+    foot_disclaim: "अस्वीकरण",
+    foot_signin: "साइन इन / साइन अप",
+    foot_copyright: "© 2026 कोगन स्टोर। सभी अधिकार सुरक्षित। उत्पाद लिंक आधिकारिक मार्केटप्लेस के संबद्ध रीडायरेक्ट हैं।"
+  },
+  fr: {
+    nav_all: "Tous les Produits",
+    nav_terms: "Conditions Générales",
+    nav_contact: "Contactez-nous",
+    nav_seller: "Devenir Vendeur",
+    nav_seller_earn: "Devenir Vendeur et Gagner",
+    hero_title: "Marché En Ligne Moderne Complet",
+    hero_desc: "Kogan Store est un marché en ligne moderne proposant de l'électronique, des téléphones, des plantes, des articles de maison et plus encore. Il offre une expérience d'achat rapide, simple et fiable avec des produits de qualité à des prix abordables.",
+    section_title: "Nos Produits",
+    search_placeholder: "Rechercher un produit...",
+    empty_msg: "Le registre de déploiement est vide.",
+    zero_match: "Aucun élément ne correspond à l'index de recherche.",
+    error_db: "Connexion à la base de données interrompue.",
+    view_btn: "Voir",
+    loading_more: "Chargement d'articles spectaculaires...",
+    all_loaded: "Affichage de tous les produits disponibles",
+    foot_brand_desc: "Votre agrégateur de marché mondial. Découvrez les meilleures offres sur Amazon, Alibaba, AliExpress et plus de 12 autres plateformes.",
+    foot_h_company: "Entreprise",
+    foot_about: "À propos",
+    foot_works: "Comment ça marche",
+    foot_careers: "Carrières",
+    foot_press: "Presse",
+    foot_h_market: "Marchés",
+    foot_h_support: "Support",
+    foot_help: "Centre d'aide",
+    foot_tele: "Chat Telegram",
+    foot_email: "Assistance par e-mail",
+    foot_issue: "Signaler un problème",
+    foot_h_legal: "Juridique",
+    foot_privacy: "Politique de confidentialité",
+    foot_terms: "Conditions d'utilisation",
+    foot_cookie: "Politique des cookies",
+    foot_disclaim: "Clause de non-responsabilité",
+    foot_signin: "Se connecter / S'inscrire",
+    foot_copyright: "© 2026 Kogan Store. Tous droits réservés. Les liens produits sont des redirections affiliées vers les marchés officiels."
+  },
+  ar: {
+    nav_all: "جميع المنتجات",
+    nav_terms: "الشروط والأحكام",
+    nav_contact: "اتصل بنا",
+    nav_seller: "كن بائعاً",
+    nav_seller_earn: "كن بائعاً وابدأ الكسب",
+    hero_title: "سوق متكامل حديث عبر الإنترنت",
+    hero_desc: "متجر كوغان هو سوق حديث عبر الإنترنت يقدم الإلكترونيات والهواتف والنباتات والمستلزمات المنزلية والمزيد. يوفر تجربة تسوق سريعة وبسيطة وموثوقة مع منتجات عالية الجودة بأسعار معقولة.",
+    section_title: "منتجاتنا",
+    search_placeholder: "ابحث في سجل المنتجات...",
+    empty_msg: "سجل نشر قاعدة البيانات فارغ.",
+    zero_match: "لا توجد عناصر مطابقة لمؤشر البحث.",
+    error_db: "انقطع الاتصال بقاعدة البيانات.",
+    view_btn: "عرض",
+    loading_more: "جاري تحميل المزيد من المنتجات الرائعة...",
+    all_loaded: "عرض جميع المنتجات المتاحة",
+    foot_brand_desc: "مجمع السوق العالمي الخاص بك. اكتشف أفضل العروض عبر Amazon و Alibaba و AliExpress و 12+ من المنصات الأخرى.",
+    foot_h_company: "الشركة",
+    foot_about: "من نحن",
+    foot_works: "كيف يعمل",
+    foot_careers: "الوظائف",
+    foot_press: "الصحافة",
+    foot_h_market: "الأسواق",
+    foot_h_support: "الدعم",
+    foot_help: "مركز المساعدة",
+    foot_tele: "دردشة تليجرام",
+    foot_email: "الدعم عبر البريد",
+    foot_issue: "الإبلاغ عن مشكلة",
+    foot_h_legal: "قانوني",
+    foot_privacy: "سياسة الخصوصية",
+    foot_terms: "شروط الخدمة",
+    foot_cookie: "سياسة ملفات الارتباط",
+    foot_disclaim: "إخلاء المسؤولية",
+    foot_signin: "تسجيل الدخول / التسجيل",
+    foot_copyright: "© 2026 متجر كوغان. جميع الحقوق محفوظة. روابط المنتجات هي توجيهات تسويقية للمتاجر الرسمية."
+  },
+
+  de: { 
+    nav_all: "Alle Produkte",
+    nav_terms: "Allgemeine Geschäftsbedingungen",
+    nav_contact: "Kontaktieren Sie uns",
+    nav_seller: "Verkäufer werden",
+    nav_seller_earn: "Verkäufer werden und verdienen",
+    hero_title: "Kompletter moderner Online-Marktplatz",
+    hero_desc: "Kogan Store ist ein moderner Online-Marktplatz, der Elektronik, Telefone, Pflanzen, Haushaltsartikel und mehr anbietet. Wir bieten ein schnelles, einfaches und zuverlässiges Einkaufserlebnis mit Qualitätsprodukten zu erschwinglichen Preisen.",
+    section_title: "Unsere Produkte",
+    search_placeholder: "Produktregister durchsuchen...",
+    empty_msg: "Datenbankregister ist leer.",
+    zero_match: "Keine Artikel entsprechen dem Suchindex.",
+    error_db: "Datenbankverbindung unterbrochen.",
+    view_btn: "Ansehen",
+    loading_more: "Spektakuläre Artikel werden geladen...",
+    all_loaded: "Alle verfügbaren Produkte werden angezeigt",
+    foot_brand_desc: "Ihr globaler Marktplatz-Aggregator. Entdecken Sie die besten Angebote bei Amazon, Alibaba, AliExpress und über 12 weiteren Plattformen.",
+    foot_h_company: "Unternehmen",
+    foot_about: "Über uns",
+    foot_works: "So funktioniert es",
+    foot_careers: "Karriere",
+    foot_press: "Presse",
+    foot_h_market: "Marktplätze",
+    foot_h_support: "Support",
+    foot_help: "Hilfe-Center",
+    foot_tele: "Telegram-Chat",
+    foot_email: "E-Mail-Support",
+    foot_issue: "Problem melden",
+    foot_h_legal: "Rechtliches",
+    foot_privacy: "Datenschutzrichtlinie",
+    foot_terms: "Nutzungsbedingungen",
+    foot_cookie: "Cookie-Richtlinie",
+    foot_disclaim: "Haftungsausschluss",
+    foot_signin: "Anmelden / Registrieren",
+    foot_copyright: "© 2026 Kogan Store. Alle Rechte vorbehalten. Produktlinks sind Affiliate-Weiterleitungen zu offiziellen Marktplätzen."
+  },
+  pt: { // Portuguese
+    nav_all: "Todos os Produtos",
+    nav_terms: "Termos e Condições",
+    nav_contact: "Contate-nos",
+    nav_seller: "Torne-se um Vendedor",
+    nav_seller_earn: "Torne-se um Vendedor e Ganhe",
+    hero_title: "Mercado Online Moderno e Completo",
+    hero_desc: "O Kogan Store é um mercado online moderno que oferece eletrônicos, celulares, plantas, itens para casa e muito mais. Oferece uma experiência de compra rápida, simples e confiável com produtos de qualidade a preços acessíveis.",
+    section_title: "Nossos Produtos",
+    search_placeholder: "Pesquisar registro de produtos...",
+    empty_msg: "O registro do banco de dados está vazio.",
+    zero_match: "Nenhum item corresponde ao índice de pesquisa.",
+    error_db: "Conexão com o banco de dados interrompida.",
+    view_btn: "Ver",
+    loading_more: "Carregando itens espetaculares...",
+    all_loaded: "Mostrando todos os produtos disponíveis",
+    foot_brand_desc: "Seu agregador de mercado global. Descubra as melhores ofertas na Amazon, Alibaba, AliExpress e mais de 12 plataformas.",
+    foot_h_company: "Empresa",
+    foot_about: "Sobre nós",
+    foot_works: "Como funciona",
+    foot_careers: "Carreiras",
+    foot_press: "Imprensa",
+    foot_h_market: "Mercados",
+    foot_h_support: "Suporte",
+    foot_help: "Centro de Ajuda",
+    foot_tele: "Chat no Telegram",
+    foot_email: "Suporte por E-mail",
+    foot_issue: "Relatar problema",
+    foot_h_legal: "Jurídico",
+    foot_privacy: "Política de Privacidade",
+    foot_terms: "Termos de Serviço",
+    foot_cookie: "Política de Cookies",
+    foot_disclaim: "Aviso Legal",
+    foot_signin: "Entrar / Cadastrar-se",
+    foot_copyright: "© 2026 Kogan Store. Todos os direitos reservados. Os links dos produtos são redirecionamentos de afiliados para marketplaces oficiais."
+  },
+  ru: { // Russian
+    nav_all: "Все товары",
+    nav_terms: "Условия и положения",
+    nav_contact: "Связаться с нами",
+    nav_seller: "Стать продавцом",
+    nav_seller_earn: "Станьте продавцом и зарабатывайте",
+    hero_title: "Современный онлайн-маркетплейс",
+    hero_desc: "Kogan Store — это современный онлайн-маркетплейс, предлагающий электронику, телефоны, растения, товары для дома и многое другое. Мы обеспечиваем быстрый, простой и надежный процесс покупок с качественными товарами по доступным ценам.",
+    section_title: "Наши товары",
+    search_placeholder: "Поиск в реестре товаров...",
+    empty_msg: "Реестр базы данных пуст.",
+    zero_match: "Поисковый индекс не дал результатов.",
+    error_db: "Соединение с базой данных прервано.",
+    view_btn: "Просмотр",
+    loading_more: "Загрузка захватывающих товаров...",
+    all_loaded: "Отображены все доступные товары",
+    foot_brand_desc: "Ваш глобальный агрегатор маркетплейсов. Откройте для себя лучшие предложения на Amazon, Alibaba, AliExpress и 12+ других платформах.",
+    foot_h_company: "Компания",
+    foot_about: "О нас",
+    foot_works: "Как это работает",
+    foot_careers: "Вакансии",
+    foot_press: "Пресса",
+    foot_h_market: "Маркетплейсы",
+    foot_h_support: "Поддержка",
+    foot_help: "Справочный центр",
+    foot_tele: "Telegram-чат",
+    foot_email: "Поддержка по эл. почте",
+    foot_issue: "Сообщить о проблеме",
+    foot_h_legal: "Юридическая информация",
+    foot_privacy: "Политика конфиденциальности",
+    foot_terms: "Условия использования",
+    foot_cookie: "Политика использования файлов cookie",
+    foot_disclaim: "Отказ от ответственности",
+    foot_signin: "Войти / Зарегистрироваться",
+    foot_copyright: "© 2026 Kogan Store. Все права защищены. Ссылки на товары являются партнерскими перенаправлениями на официальные маркетплейсы."
+  },
+  it: { // Italian
+    nav_all: "Tutti i prodotti",
+    nav_terms: "Termini e condizioni",
+    nav_contact: "Contattaci",
+    nav_seller: "Diventa un venditore",
+    nav_seller_earn: "Diventa un venditore e guadagna",
+    hero_title: "Mercato online moderno e completo",
+    hero_desc: "Kogan Store è un mercato online moderno che offre elettronica, telefoni, piante, articoli per la casa e altro ancora. Offre un'esperienza di acquisto veloce, semplice e affidabile con prodotti di qualità a prezzi convenienti.",
+    section_title: "I nostri prodotti",
+    search_placeholder: "Cerca nel registro prodotti...",
+    empty_msg: "Il registro del database è vuoto.",
+    zero_match: "Nessun articolo corrisponde all'indice di ricerca.",
+    error_db: "Connessione al database interrotta.",
+    view_btn: "Visualizza",
+    loading_more: "Caricamento di articoli spettacolari...",
+    all_loaded: "Visualizzazione di tutti i prodotti disponibili",
+    foot_brand_desc: "Il tuo aggregatore di mercati globale. Scopri le migliori offerte su Amazon, Alibaba, AliExpress e oltre 12 altre piattaforme.",
+    foot_h_company: "Azienda",
+    foot_about: "Chi siamo",
+    foot_works: "Come funziona",
+    foot_careers: "Carriere",
+    foot_press: "Stampa",
+    foot_h_market: "Mercati",
+    foot_h_support: "Supporto",
+    foot_help: "Centro assistenza",
+    foot_tele: "Chat Telegram",
+    foot_email: "Supporto via email",
+    foot_issue: "Segnala un problema",
+    foot_h_legal: "Legale",
+    foot_privacy: "Informativa sulla privacy",
+    foot_terms: "Termini di servizio",
+    foot_cookie: "Cookie policy",
+    foot_disclaim: "Esclusione di responsabilità",
+    foot_signin: "Accedi / Registrati",
+    foot_copyright: "© 2026 Kogan Store. Tutti i diritti riservati. I link ai prodotti sono reindirizzamenti di affiliazione ai marketplace ufficiali."
+  },
+  es: { // Spanish
+    nav_all: "Todos los productos",
+    nav_terms: "Términos y condiciones",
+    nav_contact: "Contáctanos",
+    nav_seller: "Conviértete en vendedor",
+    nav_seller_earn: "Conviértete en vendedor y gana",
+    hero_title: "Mercado online moderno y completo",
+    hero_desc: "Kogan Store es un mercado online moderno que ofrece electrónica, teléfonos, plantas, artículos para el hogar y más. Brinda una experiencia de compra rápida, sencilla y confiable con productos de calidad a precios asequibles.",
+    section_title: "Nuestros productos",
+    search_placeholder: "Buscar en el registro de productos...",
+    empty_msg: "El registro de la base de datos está vacío.",
+    zero_match: "Ningún artículo coincide con el índice de búsqueda.",
+    error_db: "Conexión a la base de datos interrumpida.",
+    view_btn: "Ver",
+    loading_more: "Cargando artículos espectaculares...",
+    all_loaded: "Mostrando todos los productos disponibles",
+    foot_brand_desc: "Tu agregador de mercado global. Descubre las mejores ofertas en Amazon, Alibaba, AliExpress y más de 12 plataformas adicionales.",
+    foot_h_company: "Empresa",
+    foot_about: "Sobre nosotros",
+    foot_works: "Cómo funciona",
+    foot_careers: "Carreras",
+    foot_press: "Prensa",
+    foot_h_market: "Mercados",
+    foot_h_support: "Soporte",
+    foot_help: "Centro de ayuda",
+    foot_tele: "Chat de Telegram",
+    foot_email: "Soporte por correo electrónico",
+    foot_issue: "Informar de un problema",
+    foot_h_legal: "Legal",
+    foot_privacy: "Política de privacidad",
+    foot_terms: "Términos de servicio",
+    foot_cookie: "Política de cookies",
+    foot_disclaim: "Aviso legal",
+    foot_signin: "Iniciar sesión / Registrarse",
+    foot_copyright: "© 2026 Kogan Store. Todos los derechos reservados. Los enlaces de productos son redirecciones de afiliados a mercados oficiales."
+  },
+  fa: { // Persian (Farsi)
+    nav_all: "همه محصولات",
+    nav_terms: "شرایط و ضوابط",
+    nav_contact: "تماس با ما",
+    nav_seller: "فروشنده شوید",
+    nav_seller_earn: "فروشنده شوید و کسب درآمد کنید",
+    hero_title: "بازار آنلاین مدرن و کامل",
+    hero_desc: "Kogan Store یک بازار آنلاین مدرن است که لوازم الکترونیکی، گوشی، گیاهان، لوازم خانگی و موارد دیگر را ارائه می‌دهد. این فروشگاه تجربه خریدی سریع، ساده و مطمئن را با محصولات باکیفیت و قیمت‌های مناسب فراهم می‌کند.",
+    section_title: "محصولات ما",
+    search_placeholder: "جستجو در فهرست محصولات...",
+    empty_msg: "ثبت پایگاه داده خالی است.",
+    zero_match: "هیچ موردی با شاخص جستجو مطابقت ندارد.",
+    error_db: "اتصال پایگاه داده قطع شد.",
+    view_btn: "مشاهده",
+    loading_more: "در حال بارگذاری موارد جذاب...",
+    all_loaded: "نمایش تمام محصولات موجود",
+    foot_brand_desc: "تجمیع‌کننده بازار جهانی شما. بهترین معاملات را در آمازون، علی‌بابا، علی‌اکسپرس و بیش از ۱۲ پلتفرم دیگر کشف کنید.",
+    foot_h_company: "شرکت",
+    foot_about: "درباره ما",
+    foot_works: "چگونه کار می‌کند",
+    foot_careers: "فرصت‌های شغلی",
+    foot_press: "مطبوعات",
+    foot_h_market: "بازارها",
+    foot_h_support: "پشتیبانی",
+    foot_help: "مرکز راهنما",
+    foot_tele: "چت تلگرام",
+    foot_email: "پشتیبانی ایمیلی",
+    foot_issue: "گزارش مشکل",
+    foot_h_legal: "قانونی",
+    foot_privacy: "سیاست حفظ حریم خصوصی",
+    foot_terms: "شرایط استفاده از خدمات",
+    foot_cookie: "سیاست کوکی‌ها",
+    foot_disclaim: "سلب مسئولیت",
+    foot_signin: "ورود / ثبت‌نام",
+    foot_copyright: "© ۲۰۲۶ Kogan Store. تمامی حقوق محفوظ است. لینک‌های محصولات، ارجاعات وابسته به بازارهای رسمی هستند."
+  },
+  zh: { // Chinese
+    nav_all: "所有产品",
+    nav_terms: "条款与条件",
+    nav_contact: "联系我们",
+    nav_seller: "成为卖家",
+    nav_seller_earn: "成为卖家并赚取收益",
+    hero_title: "现代化的综合在线市场",
+    hero_desc: "Kogan Store 是一个现代化的在线市场，提供电子产品、手机、植物、家居用品等。它以实惠的价格提供优质产品，带来快速、简单且可靠的购物体验。",
+    section_title: "我们的产品",
+    search_placeholder: "搜索产品注册...",
+    empty_msg: "数据库记录为空。",
+    zero_match: "没有符合搜索条件的商品。",
+    error_db: "数据库连接中断。",
+    view_btn: "查看",
+    loading_more: "正在加载精彩商品...",
+    all_loaded: "显示所有可用产品",
+    foot_brand_desc: "您的全球市场聚合商。在亚马逊、阿里巴巴、全球速卖通等 12 个以上的平台上发现最优惠的商品。",
+    foot_h_company: "公司",
+    foot_about: "关于我们",
+    foot_works: "运作方式",
+    foot_careers: "职业发展",
+    foot_press: "新闻中心",
+    foot_h_market: "市场",
+    foot_h_support: "支持",
+    foot_help: "帮助中心",
+    foot_tele: "Telegram 聊天",
+    foot_email: "电子邮件支持",
+    foot_issue: "报告问题",
+    foot_h_legal: "法律信息",
+    foot_privacy: "隐私政策",
+    foot_terms: "服务条款",
+    foot_cookie: "Cookie 政策",
+    foot_disclaim: "免责声明",
+    foot_signin: "登录 / 注册",
+    foot_copyright: "© 2026 Kogan Store. 保留所有权利。产品链接为指向官方市场的联盟重定向链接。"
+  },
+  he: { // Hebrew
+    nav_all: "כל המוצרים",
+    nav_terms: "תנאים והגבלות",
+    nav_contact: "צור קשר",
+    nav_seller: "הפוך למוכר",
+    nav_seller_earn: "הפוך למוכר והתחל להרוויח",
+    hero_title: "זירת מסחר מקוונת מודרנית ומלאה",
+    hero_desc: "Kogan Store היא זירת מסחר מקוונת מודרנית המציעה מוצרי אלקטרוניקה, טלפונים, צמחים, מוצרים לבית ועוד. היא מספקת חווית קנייה מהירה, פשוטה ואמינה עם מוצרים איכותיים במחירים נוחים.",
+    section_title: "המוצרים שלנו",
+    search_placeholder: "חפש ברישום המוצרים...",
+    empty_msg: "רישום מסד הנתונים ריק.",
+    zero_match: "אין פריטים התואמים את אינדקס החיפוש.",
+    error_db: "חיבור למסד הנתונים נקטע.",
+    view_btn: "צפה",
+    loading_more: "טוען פריטים מרהיבים...",
+    all_loaded: "מציג את כל המוצרים הזמינים",
+    foot_brand_desc: "אגרגטור זירות המסחר הגלובלי שלך. גלה את המבצעים הטובים ביותר ב-Amazon, Alibaba, AliExpress ו-12+ פלטפורמות נוספות.",
+    foot_h_company: "חברה",
+    foot_about: "אודותינו",
+    foot_works: "איך זה עובד",
+    foot_careers: "קריירה",
+    foot_press: "עיתונות",
+    foot_h_market: "זירות מסחר",
+    foot_h_support: "תמיכה",
+    foot_help: "מרכז עזרה",
+    foot_tele: "צ'אט בטלגרם",
+    foot_email: "תמיכה בדוא\"ל",
+    foot_issue: "דווח על בעיה",
+    foot_h_legal: "משפטי",
+    foot_privacy: "מדיניות פרטיות",
+    foot_terms: "תנאי שימוש",
+    foot_cookie: "מדיניות עוגיות",
+    foot_disclaim: "הצהרת ויתור",
+    foot_signin: "התחבר / הירשם",
+    foot_copyright: "© 2026 Kogan Store. כל הזכויות שמורות. קישורי המוצרים הם הפניות שיווקיות לזירות מסחר רשמיות."
+  },
+  ko: { // Korean
+    nav_all: "모든 상품",
+    nav_terms: "이용 약관",
+    nav_contact: "문의하기",
+    nav_seller: "판매자 되기",
+    nav_seller_earn: "판매자가 되어 수익 창출하기",
+    hero_title: "완벽한 현대적 온라인 마켓플레이스",
+    hero_desc: "Kogan Store는 전자제품, 휴대폰, 식물, 생활용품 등을 제공하는 현대적인 온라인 마켓플레이스입니다. 합리적인 가격에 고품질 제품을 빠르고 간편하며 신뢰할 수 있는 쇼핑 경험으로 제공합니다.",
+    section_title: "우리 제품",
+    search_placeholder: "상품 레지스트리 검색...",
+    empty_msg: "데이터베이스 레지스트리가 비어 있습니다.",
+    zero_match: "검색 인덱스와 일치하는 항목이 없습니다.",
+    error_db: "데이터베이스 연결이 중단되었습니다.",
+    view_btn: "보기",
+    loading_more: "멋진 상품을 불러오는 중...",
+    all_loaded: "사용 가능한 모든 제품 표시 중",
+    foot_brand_desc: "당신의 글로벌 마켓플레이스 애그리게이터. 아마존, 알리바바, 알리익스프레스 등 12개 이상의 플랫폼에서 최고의 거래를 찾아보세요.",
+    foot_h_company: "회사",
+    foot_about: "회사 소개",
+    foot_works: "작동 원리",
+    foot_careers: "채용 정보",
+    foot_press: "보도 자료",
+    foot_h_market: "마켓플레이스",
+    foot_h_support: "고객 지원",
+    foot_help: "고객 센터",
+    foot_tele: "텔레그램 채팅",
+    foot_email: "이메일 지원",
+    foot_issue: "문제 보고",
+    foot_h_legal: "법적 고지",
+    foot_privacy: "개인정보 처리방침",
+    foot_terms: "서비스 이용 약관",
+    foot_cookie: "쿠키 정책",
+    foot_disclaim: "면책 조항",
+    foot_signin: "로그인 / 회원가입",
+    foot_copyright: "© 2026 Kogan Store. 모든 권리 보유. 상품 링크는 공식 마켓플레이스로 연결되는 제휴 링크입니다."
+  },
+};
+
+window.switchLanguage = function(lang) {
+  currentLang = lang;
+  document.body.dir = (lang === "ur" || lang === "ar") ? "rtl" : "ltr";
+
+  document.querySelectorAll("[data-i18n]").forEach(elem => {
+    const key = elem.getAttribute("data-i18n");
+    if(dictionary[lang][key]) elem.textContent = dictionary[lang][key];
+  });
+
+  document.querySelectorAll("[data-i18n-holder]").forEach(elem => {
+    const key = elem.getAttribute("data-i18n-holder");
+    if(dictionary[lang][key]) elem.placeholder = dictionary[lang][key];
+  });
+
+  // Keep corporate copyright statements fully synchronized across localization updates
+  const copyNode = document.getElementById("footerCopyright");
+  if (copyNode && dictionary[lang].foot_copyright) {
+    copyNode.textContent = dictionary[lang].foot_copyright;
+  }
+
+  renderProductsDisplay(displayedProducts);
+  updateStatusMessage();
+};
+
+window.toggleThemeEngine = function() {
+  const activeTheme = document.documentElement.getAttribute("data-theme") || "dark";
+  const targetTheme = activeTheme === "dark" ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", targetTheme);
+  
+  const icon = document.getElementById("themeIcon");
+  if (targetTheme === "light") {
+    icon.innerHTML = `<circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>`;
+  } else {
+    icon.innerHTML = `<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>`;
+  }
+};
+
+// Core Tracker System: Listens to Admin Panel changes and updates favicon dynamically
+function initFaviconDatabaseSynchronizer() {
+  const faviconRef = ref(db, "settings/favicon");
+  onValue(faviconRef, (snapshot) => {
+    if (snapshot.exists()) {
+      const dbFaviconUrl = snapshot.val();
+      const faviconElement = document.getElementById("dynamicFavicon");
+      if (faviconElement && dbFaviconUrl) {
+        faviconElement.href = dbFaviconUrl;
+      }
+    }
+  });
+}
+
+// Scroll Indicator Tracker Matrix: Monitors distance to trigger Scroll-To-Top operations
+window.addEventListener("scroll", () => {
+  // Triggers visibility smoothly right around when the 10th product is scrolled past
+  if (window.scrollY > 800) {
+    scrollTopBtn.classList.add("visible");
+  } else {
+    scrollTopBtn.classList.remove("visible");
+  }
+});
+
+window.scrollToTopHead = function() {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+};
+
+async function loadInitialBatch() {
+  try {
+    const productsRef = ref(db, "products");
+    const initialQuery = query(productsRef, orderByKey(), limitToLast(20));
+    const snap = await get(initialQuery);
+    
+    if (snap.exists()) {
+      const data = snap.val();
+      const keys = Object.keys(data).sort();
+      
+      const initialItems = keys.map(key => ({
+        id: key,
+        ...data[key]
+      })).reverse();
+
+      displayedProducts = initialItems;
+      lastLoadedKey = keys[0]; 
+      
+      renderProductsDisplay(displayedProducts);
+      preloadEntireDatabaseSilently();
+    } else {
+      grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;color:var(--muted);padding:40px 0;font-size:14px;">${dictionary[currentLang].empty_msg}</div>`;
+    }
+  } catch(err) {
+    console.error(err);
+    grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;color:#ef4444;padding:40px 0;font-size:14px;">${dictionary[currentLang].error_db}</div>`;
+  }
+}
+
+async function preloadEntireDatabaseSilently() {
+  if (fullyLoaded || isFetchingBackground) return;
+  isFetchingBackground = true;
+  
+  try {
+    const productsRef = ref(db, "products");
+    let nextQuery = query(productsRef, orderByKey(), limitToLast(30));
+    
+    if (lastLoadedKey) {
+      nextQuery = query(productsRef, orderByKey(), endBefore(lastLoadedKey), limitToLast(30));
+    }
+    
+    const snap = await get(nextQuery);
+    
+    if (snap.exists()) {
+      const data = snap.val();
+      const keys = Object.keys(data).sort();
+      
+      const nextBatch = keys.map(key => ({
+        id: key,
+        ...data[key]
+      })).reverse();
+      
+      lastLoadedKey = keys[0];
+      
+      displayedProducts = [...displayedProducts, ...nextBatch];
+      renderProductsDisplay(displayedProducts);
+      
+      isFetchingBackground = false;
+      setTimeout(preloadEntireDatabaseSilently, 300);
+    } else {
+      fullyLoaded = true;
+      isFetchingBackground = false;
+      updateStatusMessage();
+      fetchAllDatabaseRecords();
+    }
+  } catch (e) {
+    console.error("Background preloader paused gracefully: ", e);
+    isFetchingBackground = false;
+  }
+}
+
+async function fetchAllDatabaseRecords() {
+  try {
+    const snap = await get(ref(db, "products"));
+    if (snap.exists()) {
+      const data = snap.val();
+      allDatabaseProducts = Object.keys(data).map(key => ({
+        id: key,
+        ...data[key]
+      })).reverse();
+    }
+  } catch (e) {
+    console.debug("Indexed mapping localized to streaming core context arrays.", e);
+  }
+}
+
+window.handleSearchInput = function() {
+  clearTimeout(searchDebounceTimeout);
+  
+  searchDebounceTimeout = setTimeout(async () => {
+    const searchVal = document.getElementById("search").value.trim().toLowerCase();
+    
+    if (searchVal === "") {
+      renderProductsDisplay(displayedProducts);
+      updateStatusMessage();
+      return;
+    }
+    
+    loadStatus.textContent = ""; 
+    const activeSearchPool = allDatabaseProducts.length > 0 ? allDatabaseProducts : displayedProducts;
+    
+    const filteredMatches = activeSearchPool.filter(p => 
+      (p.title || "").toLowerCase().includes(searchVal)
+    );
+    
+    renderProductsDisplay(filteredMatches);
+  }, 250); 
+};
+
+function renderProductsDisplay(list){
+  grid.innerHTML = "";
+
+  if(list.length === 0) {
+    grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;color:var(--muted);padding:40px 0;font-size:14px;">${dictionary[currentLang].zero_match}</div>`;
+    return;
+  }
+
+  list.forEach(p => {
+    const card = document.createElement("div");
+    card.className = "card";
+    card.onclick = () => location.href = "product.html?id=" + p.id;
+
+    const pseudoRatingCount = Math.floor(200 + (p.price ? parseFloat(p.price) * 4.5 : 120));
+    
+    card.innerHTML = `
+      <div class="card-img-frame">
+        <img src="${p.image || 'https://via.placeholder.com/400'}" alt="${p.title || 'Product Asset'}" loading="lazy"/>
+      </div>
+      <div class="card-body">
+              <div class="title">${p.title || 'Premium Item'}</div>
+        <div class="rating-stars">
+          ⭐⭐⭐⭐⭐
+          <span class="rating-count">(${pseudoRatingCount.toLocaleString()})</span>
+        </div>
+        <div class="card-footer">
+          <div class="price">$${p.price || '0.00'}</div>
+          <button class="view-action-btn">${dictionary[currentLang].view_btn} ↗</button>
+        </div>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function updateStatusMessage() {
+  if (document.getElementById("search").value !== "") {
+    loadStatus.textContent = "";
+    return;
+  }
+  loadStatus.textContent = fullyLoaded ? dictionary[currentLang].all_loaded : dictionary[currentLang].loading_more;
+}
+
+window.toggleMenuDrawer = function(){
+  document.getElementById("sidebar").classList.toggle("active");
+};
+
+// Fire up core lifecycles and administrative favicon listeners on window launch
+loadInitialBatch();
+initFaviconDatabaseSynchronizer();
+</script>
+
+</body>
+</html>

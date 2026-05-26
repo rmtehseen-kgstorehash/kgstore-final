@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kogan | Terms & Conditions</title>
+
+<link id="dynamicFavicon" rel="icon" type="image/png" href="https://via.placeholder.com/32">
+
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root, [data-theme="dark"] {
+  --bg: #06060c;
+  --panel: #0d0d15;
+  --panel-glass: rgba(13, 13, 21, 0.8);
+  --text: #ffffff;
+  --text-secondary: #94a3b8;
+  --muted: #64748b;
+  --border: #1e1e30;
+  --accent: #6366f1; 
+  --accent-glow: rgba(99, 102, 241, 0.15);
+  --card-bg: #0f0f1a;
+  --card-hover-border: #6366f1;
+  --badge-bg: rgba(99, 102, 241, 0.1);
+  --badge-text: #818cf8;
+  --input-bg: #131322;
+  --ambient-gradient: radial-gradient(circle at 50% 0%, #13122b 0%, #06060c 60%);
+}
+
+[data-theme="light"] {
+  --bg: #f8fafc;
+  --panel: #ffffff;
+  --panel-glass: rgba(255, 255, 255, 0.85);
+  --text: #0f172a;
+  --text-secondary: #475569;
+  --muted: #94a3b8;
+  --border: #e2e8f0;
+  --accent: #6366f1;
+  --accent-glow: rgba(99, 102, 241, 0.08);
+  --card-bg: #ffffff;
+  --card-hover-border: #6366f1;
+  --badge-bg: #f1f5f9;
+  --badge-text: #4f46e5;
+  --input-bg: #f1f5f9;
+  --ambient-gradient: radial-gradient(circle at 50% 0%, #e0e7ff 0%, #f8fafc 60%);
+}
+
+* {
+  box-sizing: border-box;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+body {
+  margin: 0;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  color: var(--text);
+  background: var(--ambient-gradient);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+.app-container {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+@media (min-width: 768px) {
+  .app-container {
+    padding: 0 24px;
+  }
+}
+
+/* Centralized Modern Navigation Framework */
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  background: var(--panel-glass);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  z-index: 1000;
+}
+
+@media (min-width: 768px) {
+  .nav {
+    padding: 16px 24px;
+  }
+}
+
+.logo {
+  font-weight: 700;
+  letter-spacing: 2px;
+  font-size: 16px;
+  background: linear-gradient(135deg, var(--text) 40%, var(--muted) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-decoration: none;
+}
+
+@media (min-width: 768px) {
+  .logo {
+    letter-spacing: 4px;
+    font-size: 18px;
+  }
+}
+
+.desktop-menu {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.desktop-menu a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.desktop-menu a:hover {
+  color: var(--accent);
+}
+
+.nav-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+@media (min-width: 768px) {
+  .nav-controls {
+    gap: 12px;
+  }
+}
+
+.lang-selector {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 6px 10px;
+  font-size: 12px;
+  font-weight: 500;
+  border-radius: 8px;
+  outline: none;
+  cursor: pointer;
+  max-width: 95px;
+}
+
+@media (min-width: 768px) {
+  .lang-selector {
+    padding: 8px 12px;
+    font-size: 13px;
+    max-width: 140px;
+  }
+}
+
+.control-btn {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  color: var(--text);
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+@media (min-width: 768px) {
+  .control-btn {
+    width: 38px;
+    height: 38px;
+  }
+}
+
+.control-btn:hover {
+  border-color: var(--accent);
+  background: var(--accent-glow);
+}
+
+.cta-button {
+  background: var(--accent);
+  color: #ffffff;
+  border: none;
+  padding: 10px 18px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.25);
+}
+
+.cta-button:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.mobile-menu-trigger {
+  display: none;
+}
+
+/* Interactive Navigation Drawer Component */
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: -340px;
+  width: 280px;
+  height: 100%;
+  background: var(--panel);
+  border-left: 1px solid var(--border);
+  padding: 40px 30px;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 2000;
+}
+
+.sidebar.active {
+  transform: translateX(-340px);
+}
+
+body[dir="rtl"] .sidebar {
+  right: auto;
+  left: -340px;
+  border-left: none;
+  border-right: 1px solid var(--border);
+}
+
+body[dir="rtl"] .sidebar.active {
+  transform: translateX(340px);
+}
+
+.sidebar .close-drawer {
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  font-size: 20px;
+  cursor: pointer;
+  margin-bottom: 30px;
+  padding: 0;
+}
+
+.sidebar a {
+  display: block;
+  color: var(--text);
+  text-decoration: none;
+  margin: 20px 0;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+/* Enlarged Production Legal Architecture Grid Elements */
+.legal-viewport {
+  margin: 40px auto 80px auto;
+}
+
+.legal-header-block {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.legal-header-block h1 {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  margin: 0 0 12px 0;
+  background: linear-gradient(135deg, var(--text) 30%, var(--text-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@media (min-width: 768px) {
+  .legal-header-block h1 {
+    font-size: 36px;
+  }
+}
+
+.legal-header-block p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .legal-header-block p {
+    font-size: 16px;
+  }
+}
+
+.terms-container-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.terms-node {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.01);
+}
+
+@media (min-width: 768px) {
+  .terms-node {
+    padding: 32px;
+  }
+}
+
+.terms-node h2 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 14px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text);
+}
+
+@media (min-width: 768px) {
+  .terms-node h2 {
+    font-size: 21px;
+  }
+}
+
+.terms-node h2 span {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.terms-node p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .terms-node p {
+    font-size: 15.5px;
+  }
+}
+
+/* Floating Actions Controller Modules */
+.floating-support-btn {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  width: 44px;
+  height: 44px;
+  background: var(--panel-glass);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text);
+  z-index: 1000;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+
+@media (min-width: 768px) {
+  .floating-support-btn {
+    bottom: 24px;
+    right: 24px;
+    width: 50px;
+    height: 50px;
+  }
+}
+
+.floating-support-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-3px);
+}
+
+.scroll-top-btn {
+  position: fixed;
+  bottom: 68px; 
+  right: 16px;
+  width: 44px;
+  height: 44px;
+  background: var(--panel-glass);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text);
+  z-index: 1000;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  cursor: pointer;
+  transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+@media (min-width: 768px) {
+  .scroll-top-btn {
+    bottom: 86px;
+    right: 24px;
+    width: 50px;
+    height: 50px;
+  }
+}
+
+.scroll-top-btn.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.scroll-top-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+body[dir="rtl"] .floating-support-btn,
+body[dir="rtl"] .scroll-top-btn {
+  right: auto;
+  left: 16px;
+}
+
+@media (min-width: 768px) {
+  body[dir="rtl"] .floating-support-btn,
+  body[dir="rtl"] .scroll-top-btn {
+    left: 24px;
+  }
+}
+
+@media (max-width: 1023px) {
+  .desktop-menu { display: none; }
+  .mobile-menu-trigger { display: flex; }
+}
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <a href="index.html" class="logo">KOGAN</a>
+
+  <div class="desktop-menu">
+    <a href="index.html" data-i18n="nav_home">Home Page</a>
+    <a href="products-list.html" data-i18n="nav_products">All Products</a>
+    <a href="support.html" data-i18n="nav_contact">Contact Us</a>
+  </div>
+
+  <div class="nav-controls">
+    <select class="lang-selector" id="langSelect" onchange="switchLanguage(this.value)">
+      <option value="en">English</option>
+      <option value="ur">اردو</option>
+      <option value="hi">हिन्दी</option>
+      <option value="fr">Français</option>
+      <option value="ar">العربية</option>
+   <option value="de">Deutsch</option>
+<option value="pt">Português</option>
+<option value="ru">Русский</option>
+<option value="it">Italiano</option>
+<option value="es">Español</option>
+<option value="fa">فارسی</option>
+<option value="zh">中文</option>
+<option value="he">עברית</option>
+<option value="ko">한국어</option>
+
+    </select>
+
+    <button class="control-btn" onclick="toggleThemeEngine()" aria-label="Toggle Theme">
+      <svg id="themeIcon" viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+      </svg>
+    </button>
+
+    <a href="auth.html" class="cta-button desktop-menu" data-i18n="nav_seller">Become A Seller</a>
+    <button class="control-btn mobile-menu-trigger" onclick="toggleMenuDrawer()" aria-label="Open Navigation">☰</button>
+  </div>
+</div>
+
+<div class="sidebar" id="sidebar">
+  <button class="close-drawer" onclick="toggleMenuDrawer()">✕</button>
+  <a href="index.html" data-i18n="nav_home">Home Page</a>
+  <a href="products-list.html" data-i18n="nav_products">All Products</a>
+  <a href="auth.html" data-i18n="nav_seller_earn">Become A Seller And Earn</a>
+  <a href="support.html" data-i18n="nav_contact">Contact Us</a>
+</div>
+
+<div class="app-container legal-viewport">
+  
+  <div class="legal-header-block">
+    <h1 data-i18n="main_title">Terms & Conditions</h1>
+    <p data-i18n="main_sub">Please read our marketplace policy and operational guidelines carefully.</p>
+  </div>
+
+  <div class="terms-container-stack">
+    <div class="terms-node">
+      <h2><span>01.</span> <span data-i18n="t1_h">Introduction</span></h2>
+      <p data-i18n="t1_p">Welcome to Kogan Store. By using our services, apps, or logging into our cloud registry layout networks, you agree to comply fully with these absolute structural guidelines.</p>
+    </div>
+
+    <div class="terms-node">
+      <h2><span>02.</span> <span data-i18n="t2_h">User Accounts</span></h2>
+      <p data-i18n="t2_p">Users must maintain security credentials for their accounts. You are entirely responsible for tracking logs and actions performed under your authorized connection data.</p>
+    </div>
+
+    <div class="terms-node">
+      <h2><span>03.</span> <span data-i18n="t3_h">Marketplace Policy</span></h2>
+      <p data-i18n="t3_p">Our store operates as an ecosystem connecting certified sellers globally. Any fraudulent transactions or unauthorized listing injections across our database assets will result in immediate termination.</p>
+    </div>
+
+    <div class="terms-node">
+      <h2><span>04.</span> <span data-i18n="t4_h">Payment & Fees</span></h2>
+      <p data-i18n="t4_p">All financial clearings and currency parameters listed are verified in real time. Sellers must fully honor stated costs without performing off-platform transaction routing flags.</p>
+    </div>
+
+    <div class="terms-node">
+      <h2><span>05.</span> <span data-i18n="t5_h">Shipping & Delivery</span></h2>
+      <p data-i18n="t5_p">Delivery terms depend entirely on item parameters and supplier configuration metrics. Real-time fulfillment logs are generated upon cargo dispatch cycles.</p>
+    </div>
+
+    <div class="terms-node">
+      <h2><span>06.</span> <span data-i18n="t6_h">Returns & Refunds</span></h2>
+      <p data-i18n="t6_p">Refund claims must be initiated through the concierge support desk within the standard timeline window. Returned goods must match initial metadata references.</p>
+    </div>
+
+    <div class="terms-node">
+      <h2><span>07.</span> <span data-i18n="t7_h">Intellectual Property</span></h2>
+      <p data-i18n="t7_p">All structural graphics, assets, logos, styles, text layers, and database patterns are the explicit property of Kogan Store and are protected by law.</p>
+    </div>
+
+    <div class="terms-node">
+      <h2><span>08.</span> <span data-i18n="t8_h">Limitation Of Liability</span></h2>
+      <p data-i18n="t8_p">Kogan Store acts as an inventory node registry system and assumes no direct liability for system delivery delays caused by external network disruptions.</p>
+    </div>
+
+    <div class="terms-node">
+      <h2><span>09.</span> <span data-i18n="t9_h">Changes To Terms</span></h2>
+      <p data-i18n="t9_p">We reserve the authority to update or alter these marketplace variables at any timestamp. Continuous interaction with our document tree assumes implicit acceptance.</p>
+    </div>
+
+    <div class="terms-node">
+      <h2><span>10.</span> <span data-i18n="t10_h">Contact Support</span></h2>
+      <p data-i18n="t10_p">For structural legal questions, data validation requests, or security concerns, navigate directly to our interactive helpdesk page to message the admin.</p>
+    </div>
+  </div>
+
+</div>
+
+<div class="scroll-top-btn" id="scrollTopBtn" onclick="scrollToTopHead()" aria-label="Scroll to top">
+  <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="12" y1="19" x2="12" y2="5"></line>
+    <polyline points="5 12 12 5 19 12"></polyline>
+  </svg>
+</div>
+
+<a href="support.html" class="floating-support-btn" aria-label="Support">
+  <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+  </svg>
+</a>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBfNKnkuPjWCO-KnqvZrfmrbfC44K0xOY8",
+  authDomain: "koganstoree.firebaseapp.com",
+  databaseURL: "https://koganstoree-default-rtdb.firebaseio.com",
+  projectId: "koganstoree",
+  storageBucket: "koganstoree.firebasestorage.app",
+  messagingSenderId: "166010280262",
+  appId: "1:166010280262:web:a29c6fc7b8251c9997ed47"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+const scrollTopBtn = document.getElementById("scrollTopBtn");
+
+const dictionary = {
+  en: {
+    nav_home: "Home Page",
+    nav_products: "All Products",
+    nav_contact: "Contact Us",
+    nav_seller: "Become A Seller",
+    nav_seller_earn: "Become A Seller And Earn",
+    main_title: "Terms & Conditions",
+    main_sub: "Please read our marketplace policy and operational guidelines carefully.",
+    t1_h: "Introduction",
+    t1_p: "Welcome to Kogan Store. By using our services, apps, or logging into our cloud registry layout networks, you agree to comply fully with these absolute structural guidelines.",
+    t2_h: "User Accounts",
+    t2_p: "Users must maintain security credentials for their accounts. You are entirely responsible for tracking logs and actions performed under your authorized connection data.",
+    t3_h: "Marketplace Policy",
+    t3_p: "Our store operates as an ecosystem connecting certified sellers globally. Any fraudulent transactions or unauthorized listing injections across our database assets will result in immediate termination.",
+    t4_h: "Payment & Fees",
+    t4_p: "All financial clearings and currency parameters listed are verified in real time. Sellers must fully honor stated costs without performing off-platform transaction routing flags.",
+    t5_h: "Shipping & Delivery",
+    t5_p: "Delivery terms depend entirely on item parameters and supplier configuration metrics. Real-time fulfillment logs are generated upon cargo dispatch cycles.",
+    t6_h: "Returns & Refunds",
+    t6_p: "Refund claims must be initiated through the concierge support desk within the standard timeline window. Returned goods must match initial metadata references.",
+    t7_h: "Intellectual Property",
+    t7_p: "All structural graphics, assets, logos, styles, text layers, and database patterns are the explicit property of Kogan Store and are protected by law.",
+    t8_h: "Limitation Of Liability",
+    t8_p: "Kogan Store acts as an inventory node registry system and assumes no direct liability for system delivery delays caused by external network disruptions.",
+    t9_h: "Changes To Terms",
+    t9_p: "We reserve the authority to update or alter these marketplace variables at any timestamp. Continuous interaction with our document tree assumes implicit acceptance.",
+    t10_h: "Contact Support",
+    t10_p: "For structural legal questions, data validation requests, or security concerns, navigate directly to our interactive helpdesk page to message the admin."
+  },
+  ur: {
+    nav_home: "ہوم پیج",
+    nav_products: "تمام مصنوعات",
+    nav_contact: "ہم سے رابطہ کریں",
+    nav_seller: "سیلر بنیں",
+    nav_seller_earn: "سیلر بنیں اور کمائیں",
+    main_title: "شرائط و ضوابط",
+    main_sub: "براہ کرم ہماری مارکیٹ پلیس پالیسی اور آپریشنل رہنما خطوط کو غور سے پڑھیں۔",
+    t1_h: "تعارف",
+    t1_p: "کوگن اسٹور میں خوش آمدید۔ ہماری خدمات، ایپس کا استعمال کرتے ہوئے، یا ہمارے کلاؤڈ نیٹ ورکس میں لاگ ان ہو کر، آپ ان مطلق رہنما خطوط کی مکمل تعمیل کرنے سے اتفاق کرتے ہیں۔",
+    t2_h: "صارف کے اکاؤنٹس",
+    t2_p: "صارفین کو اپنے اکاؤنٹس کی سیکیورٹی کی اسناد کو برقرار رکھنا چاہیے۔ آپ اپنے مجاز کنکشن ڈیٹا کے تحت کیے جانے والے اعمال اور لاگز کو ٹریک کرنے کے مکمل ذمہ دار ہیں۔",
+    t3_h: "مارکیٹ پلیس پالیسی",
+    t3_p: "ہمارا اسٹور دنیا بھر میں تصدیق شدہ فروخت کنندگان کو جوڑنے والے ایک ماحولیاتی نظام کے طور پر کام کرتا ہے۔ ہمارے ڈیٹا بیس کے اثاثوں میں کوئی بھی دھوکہ دہی پر مبنی لین دین فوری برطرفی کا باعث بنے گا۔",
+    t4_h: "ادائیگی اور فیس",
+    t4_p: "درج کردہ تمام مالیاتی کلیئرنس اور کرنسی پیرامیٹرز کی تصدیق حقیقی وقت میں کی جاتی ہے۔ فروخت کنندگان کو بغیر کسی بیرونی لین دین کے طے شدہ اخراجات کا احترام کرنا ہوگا۔",
+    t5_h: "شپنگ اور ڈیلیوری",
+    t5_p: "ڈیلیوری کی شرائط مکمل طور پر آئٹم کے پیرامیٹرز اور سپلائر کی ترتیب پر منحصر ہیں۔ کارگو کی روانگی کے وقت ریئل ٹائم لاگز تیار کیے جاتے ہیں۔",
+    t6_h: "واپسی اور رقم کی واپسی",
+    t6_p: "رقم کی واپسی کے دعوے معیاری ٹائم لائن ونڈو کے اندر سپورٹ ڈیسک کے ذریعے شروع کیے جانے چاہئیں۔ واپس کردہ سامان کو ابتدائی ڈیٹا سے مماثل ہونا چاہیے۔",
+    t7_h: "دانشورانہ ملکیت",
+    t7_p: "تمام ساختی گرافکس، اثاثے، لوگو، سٹائل، ٹیکسٹ لیئرز، اور ڈیٹا بیس پیٹرن کوگن اسٹور کی واضح ملکیت ہیں اور قانون کے تحت محفوظ ہیں۔",
+    t8_h: "ذمہ داری کی حد",
+    t8_p: "کوگن اسٹور ایک انوینٹری نوڈ رجسٹری سسٹم کے طور پر کام کرتا ہے اور بیرونی نیٹ ورک کی رکاوٹوں کی وجہ سے ہونے والی تاخیر کی کوئی براہ راست ذمہ داری قبول نہیں کرتا ہے۔",
+    t9_h: "شرائط میں تبدیلیاں",
+    t9_p: "ہم کسی بھی وقت ان مارکیٹ پلیس متغیرات کو تبدیل کرنے کا اختیار رکھتے ہیں۔ ہمارے سسٹم کے ساتھ مسلسل تعامل آپ کی ضمنی قبولیت کو ظاہر کرتا ہے۔",
+    t10_h: "سپورٹ سے رابطہ کریں",
+    t10_p: "ساختی قانونی سوالات، ڈیٹا کی توثیق کی درخواستوں، یا سیکیورٹی خدشات کے لیے، ایڈمن کو پیغام بھیجنے کے لیے براہ راست ہمارے ہیلپ ڈیسک پیج پر جائیں۔"
+    },
+  hi: {
+    nav_home: "होम पेज",
+    nav_products: "सभी उत्पाद",
+    nav_contact: "संपर्क करें",
+    nav_seller: "विक्रेता बनें",
+    nav_seller_earn: "विक्रेता बनें और कमाएं",
+    main_title: "नियम और शर्तें",
+    main_sub: "कृपया हमारी बाज़ार नीति और परिचालन दिशानिर्देशों को ध्यान से पढ़ें।",
+    t1_h: "परिचय",
+    t1_p: "कोगन स्टोर में आपका स्वागत है। हमारी सेवाओं, ऐप्स का उपयोग करके, या हमारे क्लाउड नेटवर्क में लॉग इन करके, आप इन पूर्ण दिशानिर्देशों का पूरी तरह से पालन करने के लिए सहमत हैं।",
+    t2_h: "उपयोगकर्ता खाते",
+    t2_p: "उपयोगकर्ताओं को अपने खातों की सुरक्षा क्रेडेंशियल बनाए रखनी होगी। आप अपने अधिकृत कनेक्शन डेटा के तहत किए गए कार्यों और लॉग को ट्रैक करने के लिए पूरी तरह से जिम्मेदार हैं।",
+    t3_h: "बाज़ार नीति",
+    t3_p: "हमारा स्टोर दुनिया भर में प्रमाणित विक्रेताओं को जोड़ने वाले एक पारिस्थितिकी तंत्र के रूप में कार्य करता है। हमारे डेटाबेस में कोई भी धोखाधड़ी वाला लेनदेन तत्काल खाते की समाप्ति का कारण बनेगा।",
+    t4_h: "भुगतान और शुल्क",
+    t4_p: "सूचीबद्ध सभी वित्तीय भुगतान और मुद्रा पैरामीटर वास्तविक समय में सत्यापित किए जाते हैं। विक्रेताओं को बिना किसी बाहरी लेनदेन के निर्धारित लागतों का पूरा सम्मान करना चाहिए।",
+    t5_h: "शिपिंग और वितरण",
+    t5_p: "वितरण की शर्तें पूरी तरह से आइटम के मापदंडों और आपूर्तिकर्ता कॉन्फ़िगरेशन पर निर्भर करती हैं। कार्गो रवानगी के समय वास्तविक समय लॉग उत्पन्न होते हैं।",
+    t6_h: "रिटर्न और रिफंड",
+    t6_p: "रिफंड के दावे मानक समय सीमा के भीतर सपोर्ट डेस्क के माध्यम से शुरू किए जाने चाहिए। लौटाया गया सामान प्रारंभिक डेटा संदर्भों से मेल खाना चाहिए।",
+    t7_h: "बौद्धिक संपदा",
+    t7_p: "सभी संरचनात्मक ग्राफिक्स, संपत्ति, लोगो, शैलियाँ, टेक्स्ट परतें और डेटाबेस पैटर्न कोगन स्टोर की स्पष्ट संपत्ति हैं और कानून द्वारा संरक्षित हैं।",
+    t8_h: "दायित्व की सीमा",
+    t8_p: "कोगन स्टोर एक इन्वेंट्री नोड रजिस्ट्री सिस्टम के रूप में कार्य करता है और बाहरी नेटवर्क व्यवधानों के कारण होने वाली देरी के लिए कोई सीधा दायित्व नहीं लेता है।",
+    t9_h: "नियमों में बदलाव",
+    t9_p: "हम किसी भी समय इन बाज़ार चर को अपडेट करने या बदलने का अधिकार सुरक्षित रखते हैं। हमारे सिस्टम के साथ निरंतर बातचीत आपकी मौन स्वीकृति मानती है।",
+    t10_h: "सपोर्ट से संपर्क करें",
+    t10_p: "संरचनात्मक कानूनी प्रश्नों, डेटा सत्यापन अनुरोधों या सुरक्षा चिंताओं के लिए, एडमन को संदेश भेजने के लिए सीधे हमारे हेल्पडेस्क पेज पर जाएँ।"
+  },
+  fr: {
+    nav_home: "Page d'accueil",
+    nav_products: "Tous les produits",
+    nav_contact: "Contactez-nous",
+    nav_seller: "Devenir Vendeur",
+    nav_seller_earn: "Devenir Vendeur et Gagner",
+    main_title: "Conditions Générales",
+    main_sub: "Veuillez lire attentivement notre politique de marché et nos directives opérationnelles.",
+    t1_h: "Introduction",
+    t1_p: "Bienvenue sur Kogan Store. En utilisant nos services, applications ou en vous connectant à nos réseaux, vous acceptez de vous conformer pleinement à ces directives structurelles absolues.",
+    t2_h: "Comptes Utilisateurs",
+    t2_p: "Les utilisateurs doivent maintenir la sécurité des identifiants de leurs comptes. Vous êtes entièrement responsable du suivi des actions effectuées sous vos données de connexion autorisées.",
+    t3_h: "Politique du Marché",
+    t3_p: "Notre magasin fonctionne comme un écosystème reliant des vendeurs certifiés dans le monde entier. Toute transaction frauduleuse entraînera une résiliation immédiate.",
+    t4_h: "Paiements et Frais",
+    t4_p: "Tous les règlements financiers et paramètres de devise répertoriés sont vérifiés en temps réel. Les vendeurs doivent honorer pleinement les coûts stipulés.",
+    t5_h: "Expédition et Livraison",
+    t5_p: "Les conditions de livraison dépendent entièrement des paramètres de l'article et du fournisseur. Des journaux de suivi en temps réel sont générés lors de l'expédition.",
+    t6_h: "Retours et Remboursements",
+    t6_p: "Les demandes de remboursement doivent être initiées via le bureau d'assistance dans les délais standards. Les marchandises retournées doivent correspondre aux données initiales.",
+    t7_h: "Propriété Intellectuelle",
+    t7_p: "Tous les graphiques structurels, logos, styles, couches de texte et modèles de base de données sont la propriété exclusive de Kogan Store et sont protégés par la loi.",
+    t8_h: "Limitation de Responsabilité",
+    t8_p: "Kogan Store agit comme un système de registre d'inventaire et n'assume aucune responsabilité directe pour les retards de livraison causés par des pannes de réseau externes.",
+    t9_h: "Modification des Conditions",
+    t9_p: "Nous nous réservons le droit de mettre à jour ou de modifier ces variables à tout moment. L'interaction continue avec notre système implique votre acceptation.",
+    t10_h: "Contact Support",
+    t10_p: "Pour des questions juridiques structurelles ou des problèmes de sécurité, naviguez directement vers notre page d'assistance interactive pour envoyer un message à l'administrateur."
+  },
+  ar: {
+    nav_home: "الصفحة الرئيسية",
+    nav_products: "جميع المنتجات",
+    nav_contact: "اتصل بنا",
+    nav_seller: "كن بائعاً",
+    nav_seller_earn: "كن بائعاً وابدأ الكسب",
+    main_title: "الشروط والأحكام",
+    main_sub: "يرجى قراءة سياسة المتجر والإرشادات التشغيلية الخاصة بنا بعناية.",
+    t1_h: "مقدمة",
+    t1_p: "مرحباً بكم في متجر كوغان. باستخدام خدماتنا أو تطبيقاتنا أو تسجيل الدخول إلى شبكاتنا السحابية، فإنك توافق على الامتثال الكامل لهذه الإرشادات الهيكلية المطلقة.",
+    t2_h: "حسابات المستخدمين",
+    t2_p: "يجب على المستخدمين الحفاظ على أمان بيانات اعتماد حساباتهم. أنت مسؤول تماماً عن تتبع الإجراءات والسجلات التي يتم إجراؤها بموجب بيانات الاتصال المصرح بها الخاصة بك.",
+    t3_h: "سياسة المتجر",
+    t3_p: "يعمل متجرنا كنظام بيئي يربط البائعين المعتمدين على مستوى العالم. أي معاملات احتيالية عبر أصول قاعدة البيانات الخاصة بنا ستؤدي إلى الإنهاء الفوري.",
+    t4_h: "الدفع والرسوم",
+    t4_p: "يتم التحقق من جميع التسويات المالية ومعايير العملة المدرجة في الوقت الفعلي. يجب على البائعين الالتزام الكامل بالتكاليف المحددة دون توجيه معاملات خارج المنصة.",
+    t5_h: "الشحن والتوصيل",
+    t5_p: "تعتمد شروط التوصيل تماماً على مواصفات العنصر وإعدادات المورد. يتم إنشاء سجلات تتبع في الوقت الفعلي عند بدء دورات شحن البضائع.",
+    t6_h: "المرتجعات والاسترداد",
+    t6_p: "يجب تقديم طلبات الاسترداد من خلال مكتب الدعم الفني ضمن النافذة الزمنية القياسية. يجب أن تطابق البضائع المرتجعة مراجع البيانات الأولية.",
+    t7_h: "الملكية الفكرية",
+    t7_p: "جميع الرسومات الهيكلية والأصول والشعارات والأنماط وطبقات النصوص وأنماط قواعد البيانات هي ملكية صريحة لمتجر كوغان ومحمية بموجب القانون.",
+    t8_h: "تحديد المسؤولية",
+    t8_p: "يعمل متجر كوغان كنظام سجل للمخزون ولا يتحمل أي مسؤولية مباشرة عن تأخيرات التسليم الناتجة عن انقطاعات الشبكة الخارجية.",
+    t9_h: "تغييرات على الشروط",
+    t9_p: "نحتفظ بالحق في تحديث أو تعديل هذه المتغيرات في أي وقت. التفاعل المستمر مع نظامنا يفترض قبولك الضمني لها.",
+    t10_h: "الاتصال بالدعم",
+    t10_p: "للأسئلة القانونية الهيكلية أو طلبات التحقق من البيانات أو المخاوف الأمنية، توجه مباشرة إلى صفحة الدعم التفاعلية لإرسال رسالة إلى المسؤول."
+  },
+  de: {
+    nav_home: "Startseite", nav_products: "Alle Produkte", nav_contact: "Kontakt", nav_seller: "Verkäufer werden", nav_seller_earn: "Verkäufer werden und verdienen",
+    main_title: "Allgemeine Geschäftsbedingungen", main_sub: "Bitte lesen Sie unsere Marktplatzrichtlinien und Betriebsrichtlinien sorgfältig durch.",
+    t1_h: "Einführung", t1_p: "Willkommen im Kogan Store. Durch die Nutzung unserer Dienste, Apps oder das Einloggen in unsere Cloud-Registry-Netzwerke erklären Sie sich mit der vollständigen Einhaltung dieser strukturellen Richtlinien einverstanden.",
+    t2_h: "Benutzerkonten", t2_p: "Benutzer müssen ihre Sicherheitsdaten pflegen. Sie sind voll verantwortlich für die Protokollierung und alle Aktivitäten unter Ihren autorisierten Verbindungsdaten.",
+    t3_h: "Marktplatzrichtlinie", t3_p: "Unser Geschäft fungiert als Ökosystem zur weltweiten Verbindung zertifizierter Verkäufer. Betrügerische Transaktionen oder unbefugte Eintragungen in unsere Datenbank führen zur sofortigen Kündigung.",
+    t4_h: "Zahlungen & Gebühren", t4_p: "Alle finanziellen Abrechnungen werden in Echtzeit verifiziert. Verkäufer müssen die angegebenen Kosten einhalten, ohne Transaktionen außerhalb der Plattform abzuwickeln.",
+    t5_h: "Versand & Lieferung", t5_p: "Lieferbedingungen hängen von Artikelparametern und Lieferantenkonfigurationen ab. Echtzeit-Erfüllungsprotokolle werden bei Versand der Fracht generiert.",
+    t6_h: "Rücksendungen & Erstattungen", t6_p: "Erstattungsansprüche müssen über den Concierge-Support innerhalb der Standardfrist eingeleitet werden. Rücksendungen müssen mit den ursprünglichen Metadaten übereinstimmen.",
+    t7_h: "Geistiges Eigentum", t7_p: "Alle Grafiken, Assets, Logos, Stile und Datenbankmuster sind Eigentum von Kogan Store und gesetzlich geschützt.",
+    t8_h: "Haftungsbeschränkung", t8_p: "Kogan Store agiert als Inventar-Knotensystem und übernimmt keine direkte Haftung für Lieferverzögerungen durch externe Netzwerkstörungen.",
+    t9_h: "Änderungen der Bedingungen", t9_p: "Wir behalten uns das Recht vor, diese Variablen jederzeit zu ändern. Die kontinuierliche Nutzung unserer Dokumente setzt die implizite Zustimmung voraus.",
+    t10_h: "Support kontaktieren", t10_p: "Für rechtliche Fragen oder Sicherheitsbedenken besuchen Sie bitte unsere Helpdesk-Seite, um den Administrator zu kontaktieren."
+  },
+  pt: {
+    nav_home: "Início", nav_products: "Todos os Produtos", nav_contact: "Contato", nav_seller: "Torne-se um Vendedor", nav_seller_earn: "Torne-se um Vendedor e Ganhe",
+    main_title: "Termos e Condições", main_sub: "Por favor, leia nossas políticas de mercado e diretrizes operacionais cuidadosamente.",
+    t1_h: "Introdução", t1_p: "Bem-vindo à Kogan Store. Ao usar nossos serviços ou acessar nossos registros em nuvem, você concorda totalmente com estas diretrizes estruturais.",
+    t2_h: "Contas de Usuário", t2_p: "Os usuários devem manter credenciais de segurança. Você é o único responsável pelos logs e ações realizadas com seus dados de conexão.",
+    t3_h: "Política do Mercado", t3_p: "Nosso sistema conecta vendedores certificados globalmente. Transações fraudulentas ou injeções não autorizadas de listagens resultarão em rescisão imediata.",
+    t4_h: "Pagamentos e Taxas", t4_p: "Todos os pagamentos e parâmetros de moeda são verificados em tempo real. Os vendedores devem honrar os custos declarados sem desviar transações para fora da plataforma.",
+    t5_h: "Envio e Entrega", t5_p: "Os prazos de entrega dependem de parâmetros dos itens e métricas de fornecedores. Logs de atendimento em tempo real são gerados no despacho.",
+    t6_h: "Devoluções e Reembolsos", t6_p: "Pedidos de reembolso devem ser iniciados via suporte dentro do prazo padrão. Produtos devolvidos devem corresponder às referências de metadados originais.",
+    t7_h: "Propriedade Intelectual", t7_p: "Todos os gráficos, ativos, logotipos, estilos e padrões de banco de dados são propriedade exclusiva da Kogan Store e protegidos por lei.",
+    t8_h: "Limitação de Responsabilidade", t8_p: "A Kogan Store atua como sistema de registro de nós de inventário e não assume responsabilidade por atrasos causados por interrupções de rede externa.",
+    t9_h: "Alterações nos Termos", t9_p: "Reservamo-nos o direito de alterar estas variáveis a qualquer momento. O uso contínuo de nossos serviços implica aceitação destes termos.",
+    t10_h: "Suporte", t10_p: "Para questões legais ou solicitações de validação de dados, navegue até a página do nosso helpdesk para contatar o administrador."
+  },
+  ru: {
+    nav_home: "Главная", nav_products: "Все товары", nav_contact: "Контакты", nav_seller: "Стать продавцом", nav_seller_earn: "Станьте продавцом и зарабатывайте",
+    main_title: "Условия и положения", main_sub: "Пожалуйста, внимательно ознакомьтесь с нашей политикой маркетплейса.",
+    t1_h: "Введение", t1_p: "Добро пожаловать в Kogan Store. Используя наши сервисы или облачные сети, вы полностью соглашаетесь с данными структурными правилами.",
+    t2_h: "Учетные записи", t2_p: "Пользователи обязаны обеспечивать безопасность своих учетных данных. Вы несете полную ответственность за действия, совершенные под вашим аккаунтом.",
+    t3_h: "Политика маркетплейса", t3_p: "Наш магазин связывает сертифицированных продавцов. Любые мошеннические транзакции или несанкционированное вмешательство в базу данных приведут к немедленному удалению аккаунта.",
+    t4_h: "Оплата и комиссии", t4_p: "Все финансовые операции проверяются в режиме реального времени. Продавцы обязаны соблюдать указанные цены без использования обходных путей.",
+    t5_h: "Доставка", t5_p: "Сроки доставки зависят от параметров товара. Логи выполнения заказа генерируются в момент отправки груза.",
+    t6_h: "Возврат и обмен", t6_p: "Запросы на возврат должны быть инициированы через службу поддержки в установленные сроки. Возвращаемые товары должны соответствовать исходным метаданным.",
+    t7_h: "Интеллектуальная собственность", t7_p: "Вся графика, активы, логотипы и базы данных являются исключительной собственностью Kogan Store.",
+    t8_h: "Ограничение ответственности", t8_p: "Kogan Store выступает как система реестра узлов инвентаризации и не несет ответственности за задержки, вызванные сбоями внешних сетей.",
+    t9_h: "Изменения условий", t9_p: "Мы оставляем за собой право изменять данные правила в любое время. Дальнейшее использование сервиса означает ваше согласие с новыми условиями.",
+    t10_h: "Поддержка", t10_p: "Для юридических вопросов или проверки данных перейдите на страницу нашей службы поддержки."
+  },
+  it: {
+    nav_home: "Home Page", nav_products: "Tutti i prodotti", nav_contact: "Contatti", nav_seller: "Diventa un venditore", nav_seller_earn: "Diventa un venditore e guadagna",
+    main_title: "Termini e Condizioni", main_sub: "Si prega di leggere attentamente la nostra politica di mercato e le linee guida operative.",
+    t1_h: "Introduzione", t1_p: "Benvenuti in Kogan Store. Utilizzando i nostri servizi o accedendo alle nostre reti di registro cloud, si accetta di rispettare pienamente queste linee guida.",
+    t2_h: "Account Utente", t2_p: "Gli utenti devono mantenere sicure le proprie credenziali. Si è pienamente responsabili delle azioni eseguite sotto i propri dati di connessione.",
+    t3_h: "Politica del Mercato", t3_p: "Il nostro negozio collega venditori certificati a livello globale. Qualsiasi transazione fraudolenta o iniezione non autorizzata di elenchi comporterà la cessazione immediata.",
+    t4_h: "Pagamenti e Commissioni", t4_p: "Tutte le liquidazioni finanziarie e i parametri valutari sono verificati in tempo reale. I venditori devono onorare i costi indicati senza aggirare la piattaforma.",
+    t5_h: "Spedizione e Consegna", t5_p: "I termini di consegna dipendono dai parametri degli articoli. I log di evasione in tempo reale vengono generati alla spedizione del carico.",
+    t6_h: "Resi e Rimborsi", t6_p: "Le richieste di rimborso devono essere avviate tramite il supporto entro il periodo stabilito. I beni restituiti devono corrispondere ai riferimenti dei metadati iniziali.",
+    t7_h: "Proprietà Intellettuale", t7_p: "Tutta la grafica, gli asset, i loghi, gli stili e i modelli di database sono proprietà esclusiva di Kogan Store e protetti dalla legge.",
+    t8_h: "Limitazione di Responsabilità", t8_p: "Kogan Store funge da sistema di registro dei nodi di inventario e non si assume alcuna responsabilità diretta per ritardi causati da interruzioni di rete esterne.",
+    t9_h: "Modifiche ai Termini", t9_p: "Ci riserviamo l'autorità di aggiornare o modificare queste variabili in qualsiasi momento. L'interazione continua presuppone l'accettazione implicita.",
+    t10_h: "Contatta il Supporto", t10_p: "Per questioni legali, richieste di convalida dei dati o dubbi sulla sicurezza, naviga verso la nostra pagina di helpdesk interattiva."
+  },
+  es: {
+    nav_home: "Inicio", nav_products: "Todos los Productos", nav_contact: "Contacto", nav_seller: "Convertirse en Vendedor", nav_seller_earn: "Convertirse en Vendedor y Ganar",
+    main_title: "Términos y Condiciones", main_sub: "Lea atentamente nuestra política de mercado y directrices operativas.",
+    t1_h: "Introducción", t1_p: "Bienvenido a Kogan Store. Al usar nuestros servicios o redes de registro en la nube, usted acepta cumplir completamente con estas directrices estructurales.",
+    t2_h: "Cuentas de Usuario", t2_p: "Los usuarios deben mantener credenciales de seguridad. Usted es responsable de los registros y acciones realizados bajo su conexión autorizada.",
+    t3_h: "Política de Mercado", t3_p: "Nuestra tienda conecta vendedores certificados globalmente. Cualquier transacción fraudulenta o inyección no autorizada resultará en la terminación inmediata.",
+    t4_h: "Pagos y Tarifas", t4_p: "Todos los pagos y parámetros de moneda se verifican en tiempo real. Los vendedores deben respetar los costos declarados sin realizar rutas de transacciones fuera de la plataforma.",
+    t5_h: "Envío y Entrega", t5_p: "Los términos de entrega dependen de los parámetros del artículo. Los registros de cumplimiento en tiempo real se generan tras el despacho.",
+    t6_h: "Devoluciones y Reembolsos", t6_p: "Las reclamaciones deben iniciarse a través del centro de soporte dentro del plazo estándar. Los bienes devueltos deben coincidir con los metadatos iniciales.",
+    t7_h: "Propiedad Intelectual", t7_p: "Todos los gráficos, activos, logotipos, estilos y patrones de base de datos son propiedad exclusiva de Kogan Store y están protegidos por ley.",
+    t8_h: "Limitación de Responsabilidad", t8_p: "Kogan Store actúa como un sistema de registro de nodos de inventario y no asume responsabilidad directa por retrasos causados por interrupciones de redes externas.",
+    t9_h: "Cambios en los Términos", t9_p: "Nos reservamos la autoridad de actualizar estas variables en cualquier momento. La interacción continua supone una aceptación implícita.",
+    t10_h: "Contactar Soporte", t10_p: "Para preguntas legales o preocupaciones de seguridad, navegue directamente a nuestra página de ayuda interactiva para enviar un mensaje al administrador."
+  },
+  fa: {
+    nav_home: "صفحه اصلی", nav_products: "همه محصولات", nav_contact: "تماس با ما", nav_seller: "فروشنده شوید", nav_seller_earn: "فروشنده شوید و کسب درآمد کنید",
+    main_title: "شرایط و ضوابط", main_sub: "لطفاً سیاست‌های بازار و دستورالعمل‌های عملیاتی ما را به دقت مطالعه کنید.",
+    t1_h: "مقدمه", t1_p: "به Kogan Store خوش آمدید. با استفاده از خدمات یا ورود به شبکه ثبت ابری ما، موافقت می‌کنید که کاملاً از این دستورالعمل‌های ساختاری پیروی کنید.",
+    t2_h: "حساب‌های کاربری", t2_p: "کاربران باید اعتبارنامه امنیتی حساب خود را حفظ کنند. شما مسئول تمامی فعالیت‌های انجام شده تحت داده‌های اتصال خود هستید.",
+    t3_h: "سیاست بازار", t3_p: "فروشگاه ما به عنوان اکوسیستمی برای اتصال فروشندگان معتبر فعالیت می‌کند. هرگونه تراکنش متقلبانه منجر به فسخ فوری خواهد شد.",
+    t4_h: "پرداخت و کارمزد", t4_p: "تمام تسویه حساب‌های مالی در زمان واقعی بررسی می‌شوند. فروشندگان باید هزینه‌های اعلام شده را بدون استفاده از روش‌های پرداخت خارج از پلتفرم رعایت کنند.",
+    t5_h: "حمل و تحویل", t5_p: "شرایط تحویل به پارامترهای کالا بستگی دارد. گزارش‌های انجام سفارش هنگام ارسال بار تولید می‌شوند.",
+    t6_h: "مرجوعی و بازپرداخت", t6_p: "درخواست‌های بازپرداخت باید در بازه زمانی استاندارد از طریق مرکز پشتیبانی آغاز شود. کالاهای مرجوعی باید با متادیتای اولیه مطابقت داشته باشند.",
+    t7_h: "مالکیت معنوی", t7_p: "تمامی گرافیک‌ها، دارایی‌ها، لوگوها و الگوهای پایگاه داده، مالکیت انحصاری Kogan Store بوده و توسط قانون محافظت می‌شوند.",
+    t8_h: "سلب مسئولیت", t8_p: "Kogan Store به عنوان یک سیستم ثبت گره موجودی عمل می‌کند و هیچ مسئولیتی در قبال تأخیرهای ناشی از اختلالات شبکه خارجی ندارد.",
+    t9_h: "تغییر در شرایط", t9_p: "ما حق تغییر این متغیرها را در هر زمانی داریم. تعامل مداوم با مستندات ما به معنای پذیرش ضمنی آن‌هاست.",
+    t10_h: "تماس با پشتیبانی", t10_p: "برای سوالات قانونی یا نگرانی‌های امنیتی، مستقیماً به صفحه راهنمای تعاملی ما بروید تا به مدیر پیام دهید."
+  },
+  zh: {
+    nav_home: "首页", nav_products: "所有产品", nav_contact: "联系我们", nav_seller: "成为卖家", nav_seller_earn: "成为卖家并赚取收益",
+    main_title: "条款与条件", main_sub: "请仔细阅读我们的市场政策和运营指南。",
+    t1_h: "介绍", t1_p: "欢迎来到 Kogan Store。使用我们的服务或登录我们的云注册网络，即表示您完全同意遵守这些绝对的结构性准则。",
+    t2_h: "用户账户", t2_p: "用户必须维护其账户的安全凭据。您对授权连接数据下执行的操作完全负责。",
+    t3_h: "市场政策", t3_p: "我们的商店是一个连接全球认证卖家的生态系统。任何欺诈交易或未经授权的列表注入都将导致立即终止账户。",
+    t4_h: "支付与费用", t4_p: "所有财务结算和货币参数均实时验证。卖家必须遵守已声明的成本，不得执行平台外交易路由标记。",
+    t5_h: "运输与交付", t5_p: "交付条款完全取决于项目参数和供应商配置。实时履约日志会在货物调度时生成。",
+    t6_h: "退货与退款", t6_p: "退款申请必须在标准时间窗口内通过礼宾支持台发起。退回的商品必须与初始元数据参考相符。",
+    t7_h: "知识产权", t7_p: "所有结构图形、资产、徽标、样式、文本层和数据库模式均为 Kogan Store 的专有财产，并受法律保护。",
+    t8_h: "责任限制", t8_p: "Kogan Store 充当库存节点注册系统，不对因外部网络中断导致的系统交付延迟承担直接责任。",
+    t9_h: "条款变更", t9_p: "我们保留在任何时间戳更新或更改这些市场变量的权力。持续与我们的文档树交互即表示默认接受。",
+    t10_h: "联系支持", t10_p: "如有法律问题、数据验证请求或安全疑虑，请直接导航至我们的交互式帮助台页面以联系管理员。"
+  },
+  he: {
+    nav_home: "דף הבית", nav_products: "כל המוצרים", nav_contact: "צור קשר", nav_seller: "הפוך למוכר", nav_seller_earn: "הפוך למוכר והרווח",
+    main_title: "תנאים והגבלות", main_sub: "אנא קרא בעיון את מדיניות השוק וההנחיות התפעוליות שלנו.",
+    t1_h: "מבוא", t1_p: "ברוך הבא ל-Kogan Store. על ידי שימוש בשירותים שלנו או התחברות לרשתות הרישום בענן, אתה מסכים לציית במלואו להנחיות המבניות הללו.",
+    t2_h: "חשבונות משתמש", t2_p: "משתמשים חייבים לשמור על אישורי אבטחה. אתה האחראי הבלעדי לכל פעולה המתבצעת תחת נתוני החיבור שלך.",
+    t3_h: "מדיניות שוק", t3_p: "החנות שלנו פועלת כמערכת אקולוגית המחברת מוכרים מאומתים. כל פעולה מרמתית תוביל להפסקה מיידית.",
+    t4_h: "תשלומים ועמלות", t4_p: "כל הסליקות הפיננסיות מאומתות בזמן אמת. מוכרים חייבים לכבד את העלויות המוצהרות ללא הפניה מחוץ לפלטפורמה.",
+    t5_h: "משלוח ומסירה", t5_p: "תנאי המסירה תלויים בפרמטרים של הפריט ובהגדרות הספק. לוגים של ביצוע נוצרים עם משלוח המטען.",
+    t6_h: "החזרות והחזרים", t6_p: "בקשות להחזר יש להגיש דרך דלפק התמיכה בטווח הזמן המקובל. סחורה מוחזרת חייבת להתאים למטא-דאטה המקורי.",
+    t7_h: "קניין רוחני", t7_p: "כל הגרפיקה, הנכסים, הלוגואים והדפוסים הם רכושו הבלעדי של Kogan Store ומוגנים על פי חוק.",
+    t8_h: "הגבלת אחריות", t8_p: "Kogan Store משמשת כמערכת רישום צמתי מלאי ואינה נושאת באחריות ישירה לעיכובי אספקה הנגרמים משיבושי רשת חיצוניים.",
+    t9_h: "שינויים בתנאים", t9_p: "אנו שומרים לעצמנו את הסמכות לעדכן משתנים אלו בכל עת. אינטראקציה מתמשכת מהווה הסכמה מרומזת.",
+    t10_h: "צור קשר עם התמיכה", t10_p: "לשאלות משפטיות או חששות אבטחה, נווט לדף התמיכה האינטראקטיבי שלנו כדי לשלוח הודעה למנהל."
+  },
+  ko: {
+    nav_home: "홈 페이지", nav_products: "모든 상품", nav_contact: "문의하기", nav_seller: "판매자 되기", nav_seller_earn: "판매자가 되어 수익 창출하기",
+    main_title: "이용 약관", main_sub: "당사의 마켓플레이스 정책 및 운영 지침을 주의 깊게 읽어보시기 바랍니다.",
+    t1_h: "소개", t1_p: "Kogan Store에 오신 것을 환영합니다. 당사의 서비스나 클라우드 레지스트리 레이아웃 네트워크를 사용함으로써 귀하는 이 모든 구조적 지침을 완전히 준수할 것에 동의합니다.",
+    t2_h: "사용자 계정", t2_p: "사용자는 계정 보안 자격 증명을 유지해야 합니다. 귀하는 귀하의 인증된 연결 데이터 하에서 수행된 로그 및 작업에 대해 전적으로 책임을 집니다.",
+    t3_h: "마켓플레이스 정책", t3_p: "당사 매장은 전 세계의 인증된 판매자를 연결하는 생태계로 운영됩니다. 사기성 거래나 허가되지 않은 데이터베이스 조작 시 즉시 계정이 해지됩니다.",
+    t4_h: "결제 및 수수료", t4_p: "모든 금융 정산 및 통화 매개변수는 실시간으로 확인됩니다. 판매자는 플랫폼 외부 거래 라우팅을 수행하지 않고 명시된 비용을 온전히 준수해야 합니다.",
+    t5_h: "배송 및 전달", t5_p: "배송 조건은 상품 매개변수와 공급업체 구성 지표에 따라 다릅니다. 실시간 이행 로그는 화물 발송 주기에 따라 생성됩니다.",
+    t6_h: "반품 및 환불", t6_p: "환불 청구는 표준 시간 창 내에서 컨시어지 지원 데스크를 통해 시작되어야 합니다. 반품된 상품은 초기 메타데이터 참조와 일치해야 합니다.",
+    t7_h: "지적 재산권", t7_p: "모든 구조적 그래픽, 자산, 로고, 스타일, 텍스트 레이어 및 데이터베이스 패턴은 Kogan Store의 명시적 재산이며 법적 보호를 받습니다.",
+    t8_h: "책임 제한", t8_p: "Kogan Store는 재고 노드 레지스트리 시스템으로 작동하며 외부 네트워크 중단으로 인한 시스템 전달 지연에 대해 직접적인 책임을 지지 않습니다.",
+    t9_h: "약관 변경", t9_p: "당사는 언제든지 이러한 마켓플레이스 변수를 업데이트하거나 변경할 권한을 보유합니다. 당사 문서 트리와의 지속적인 상호 작용은 암묵적인 동의를 가정합니다.",
+    t10_h: "지원 문의", t10_p: "구조적인 법률 질문, 데이터 검증 요청 또는 보안 문제가 있는 경우, 대화형 헬프데스크 페이지로 바로 이동하여 관리자에게 메시지를 보내십시오."
+  }
+};
+
+window.switchLanguage = function(lang) {
+  document.body.dir = (lang === "ur" || lang === "ar") ? "rtl" : "ltr";
+
+  document.querySelectorAll("[data-i18n]").forEach(elem => {
+    const key = elem.getAttribute("data-i18n");
+    if(dictionary[lang][key]) elem.textContent = dictionary[lang][key];
+  });
+};
+
+window.toggleThemeEngine = function() {
+  const activeTheme = document.documentElement.getAttribute("data-theme") || "dark";
+  const targetTheme = activeTheme === "dark" ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", targetTheme);
+  
+  const icon = document.getElementById("themeIcon");
+  if (targetTheme === "light") {
+    icon.innerHTML = `<circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>`;
+  } else {
+    icon.innerHTML = `<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>`;
+  }
+};
+
+function initFaviconDatabaseSynchronizer() {
+  const faviconRef = ref(db, "settings/favicon");
+  onValue(faviconRef, (snapshot) => {
+    if (snapshot.exists()) {
+      const dbFaviconUrl = snapshot.val();
+      const faviconElement = document.getElementById("dynamicFavicon");
+      if (faviconElement && dbFaviconUrl) {
+        faviconElement.href = dbFaviconUrl;
+      }
+    }
+  });
+}
+
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 400) {
+    scrollTopBtn.classList.add("visible");
+  } else {
+    scrollTopBtn.classList.remove("visible");
+  }
+});
+
+window.scrollToTopHead = function() {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+};
+
+window.toggleMenuDrawer = function(){
+  document.getElementById("sidebar").classList.toggle("active");
+};
+
+initFaviconDatabaseSynchronizer();
+</script>
+
+</body>
+</html>

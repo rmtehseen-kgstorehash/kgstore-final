@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kogan | Premium Asset Inventory</title>
+
+<link id="dynamicFavicon" rel="icon" type="image/png" href="https://via.placeholder.com/32">
+
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root, [data-theme="dark"] {
+  --bg: #06060c;
+  --panel: #0d0d15;
+  --panel-glass: rgba(13, 13, 21, 0.8);
+  --text: #ffffff;
+  --text-secondary: #94a3b8;
+  --muted: #64748b;
+  --border: #1e1e30;
+  --accent: #6366f1; 
+  --accent-glow: rgba(99, 102, 241, 0.15);
+  --card-bg: #0f0f1a;
+  --card-hover-border: #6366f1;
+  --badge-bg: rgba(99, 102, 241, 0.1);
+  --badge-text: #818cf8;
+  --input-bg: #131322;
+  --ambient-gradient: radial-gradient(circle at 50% 0%, #13122b 0%, #06060c 60%);
+}
+
+[data-theme="light"] {
+  --bg: #f8fafc;
+  --panel: #ffffff;
+  --panel-glass: rgba(255, 255, 255, 0.85);
+  --text: #0f172a;
+  --text-secondary: #475569;
+  --muted: #94a3b8;
+  --border: #e2e8f0;
+  --accent: #6366f1;
+  --accent-glow: rgba(99, 102, 241, 0.08);
+  --card-bg: #ffffff;
+  --card-hover-border: #6366f1;
+  --badge-bg: #f1f5f9;
+  --badge-text: #4f46e5;
+  --input-bg: #f1f5f9;
+  --ambient-gradient: radial-gradient(circle at 50% 0%, #e0e7ff 0%, #f8fafc 60%);
+}
+
+* {
+  box-sizing: border-box;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+body {
+  margin: 0;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  color: var(--text);
+  background: var(--ambient-gradient);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+.app-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Centralized Modern Navigation Framework */
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  background: var(--panel-glass);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  z-index: 1000;
+}
+
+.logo {
+  font-weight: 700;
+  letter-spacing: 4px;
+  font-size: 18px;
+  background: linear-gradient(135deg, var(--text) 40%, var(--muted) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-decoration: none;
+}
+
+.desktop-menu {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.desktop-menu a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.desktop-menu a:hover {
+  color: var(--accent);
+}
+
+.nav-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.lang-selector {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 8px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 8px;
+  outline: none;
+  cursor: pointer;
+}
+
+.control-btn {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  color: var(--text);
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.control-btn:hover {
+  border-color: var(--accent);
+  background: var(--accent-glow);
+}
+
+.cta-button {
+  background: var(--accent);
+  color: #ffffff;
+  border: none;
+  padding: 10px 18px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.25);
+}
+
+.cta-button:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.mobile-menu-trigger {
+  display: none;
+}
+
+/* Interactive Navigation Drawer Component */
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: -340px;
+  width: 280px;
+  height: 100%;
+  background: var(--panel);
+  border-left: 1px solid var(--border);
+  padding: 40px 30px;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 2000;
+}
+
+.sidebar.active {
+  transform: translateX(-340px);
+}
+
+body[dir="rtl"] .sidebar {
+  right: auto;
+  left: -340px;
+  border-left: none;
+  border-right: 1px solid var(--border);
+}
+
+body[dir="rtl"] .sidebar.active {
+  transform: translateX(340px);
+}
+
+.sidebar .close-drawer {
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  font-size: 20px;
+  cursor: pointer;
+  margin-bottom: 30px;
+  padding: 0;
+}
+
+.sidebar a {
+  display: block;
+  color: var(--text);
+  text-decoration: none;
+  margin: 20px 0;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+/* Advanced Master Control Filtering Core Module */
+.control-hub {
+  max-width: 600px;
+  margin: 60px auto 30px auto;
+  padding: 0 20px;
+}
+
+.control-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.search-wrapper input {
+  width: 100%;
+  padding: 14px 20px;
+  background: var(--input-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 14px;
+  outline: none;
+  text-align: center;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+}
+
+.search-wrapper input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-glow);
+}
+
+.filter-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px;
+  width: 100%;
+}
+
+.filter-actions select {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+
+  background: var(--panel);
+  border: 1px solid var(--border);
+  color: var(--text);
+
+  padding: 10px 8px;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 500;
+
+  border-radius: 10px;
+  outline: none;
+  cursor: pointer;
+
+  text-align: center;
+  text-align-last: center;
+
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.filter-actions select:hover,
+.filter-actions select:focus {
+  border-color: var(--accent);
+}
+
+/* Mobile Fix */
+@media (max-width: 480px) {
+  .filter-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .filter-actions select {
+    font-size: 11px;
+    padding: 9px 7px;
+  }
+}
+/* Performance Realtime Status Monitor Display */
+.stream-monitor {
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 30px;
+}
+
+/* Premium Balanced Performance 5-Column Desktop / 2-Column Mobile Grid Framework */
+.grid-frame {
+  margin-bottom: 80px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+/* Premium Dynamic Asset Card Component Layout */
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  cursor: pointer;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+.card:hover {
+  border-color: var(--card-hover-border);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12), 0 0 0 1px var(--accent);
+}
+
+.card-img-frame {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: #f1f5f9;
+  overflow: hidden;
+  position: relative;
+  border-radius: 16px 16px 0 0;
+}
+
+[data-theme="dark"] .card-img-frame {
+  background: #090911;
+}
+
+/* Dynamic Placeholder Canvas Animation Logic */
+.card-img-frame::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.04), transparent);
+  transform: translateX(-100%);
+  animation: pulse 1.5s infinite;
+}
+
+.card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.card img.loaded {
+  opacity: 1;
+}
+
+.card:hover img.loaded {
+  transform: scale(1.05);
+}
+
+.card-body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 8px;
+}
+
+.card-badge {
+  display: inline-block;
+  align-self: flex-start;
+  background: var(--badge-bg);
+  color: var(--badge-text);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.title {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--text);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  height: 38px;
+  width: 100%;
+}
+
+.rating-stars {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  color: #fbbf24;
+  font-size: 12px;
+}
+
+.rating-count {
+  color: var(--muted);
+  font-size: 12px;
+  margin-left: 4px;
+}
+
+body[dir="rtl"] .rating-count {
+  margin-left: 0;
+  margin-right: 4px;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  width: 100%;
+}
+
+.price {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.view-action-btn {
+  background: var(--badge-bg);
+  color: var(--badge-text);
+  border: none;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.card:hover .view-action-btn {
+  background: var(--accent);
+  color: #ffffff;
+}
+
+/* Floating Actions Controller Modules */
+.floating-support-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 50px;
+  height: 50px;
+  background: var(--panel-glass);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text);
+  z-index: 1000;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+
+.floating-support-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-3px);
+}
+
+/* Scroll To Top Structural Navigation Element Module Component */
+.scroll-top-btn {
+  position: fixed;
+  bottom: 86px; 
+  right: 24px;
+  width: 50px;
+  height: 50px;
+  background: var(--panel-glass);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text);
+  z-index: 1000;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  cursor: pointer;
+  transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+.scroll-top-btn.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.scroll-top-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+body[dir="rtl"] .floating-support-btn,
+body[dir="rtl"] .scroll-top-btn {
+  right: auto;
+  left: 24px;
+}
+
+@keyframes pulse {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@media (max-width: 1023px) {
+  .desktop-menu { display: none; }
+  .mobile-menu-trigger { display: flex; }
+  .grid { gap: 12px; }
+  .card-body { padding: 12px; }
+}
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <a href="index.html" class="logo">KOGAN</a>
+
+  <div class="desktop-menu">
+    <a href="index.html" data-i18n="nav_home">Home Page</a>
+    <a href="terms.html" data-i18n="nav_terms">Terms & Conditions</a>
+    <a href="support.html" data-i18n="nav_contact">Contact Us</a>
+  </div>
+
+  <div class="nav-controls">
+    <select class="lang-selector" id="langSelect" onchange="switchLanguage(this.value)">
+      <option value="en">English</option>
+      <option value="ur">اردو</option>
+      <option value="hi">हिन्दी</option>
+      <option value="fr">Français</option>
+      <option value="ar">العربية</option>
+<option value="de">Deutsch</option>
+<option value="pt">Português</option>
+<option value="ru">Русский</option>
+<option value="it">Italiano</option>
+<option value="es">Español</option>
+<option value="fa">فارسی</option>
+<option value="zh">中文</option>
+<option value="he">עברית</option>
+<option value="ko">한국어</option>
+   
+    </select>
+
+    <button class="control-btn" onclick="toggleThemeEngine()" aria-label="Toggle Theme">
+      <svg id="themeIcon" viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+      </svg>
+    </button>
+
+    <a href="auth.html" class="cta-button desktop-menu" data-i18n="nav_seller">Become A Seller</a>
+    <button class="control-btn mobile-menu-trigger" onclick="toggleMenuDrawer()" aria-label="Open Navigation">☰</button>
+  </div>
+</div>
+
+<div class="sidebar" id="sidebar">
+  <button class="close-drawer" onclick="toggleMenuDrawer()">✕</button>
+  <a href="index.html" data-i18n="nav_home">Home Page</a>
+  <a href="terms.html" data-i18n="nav_terms">Terms & Conditions</a>
+  <a href="auth.html" data-i18n="nav_seller_earn">Become A Seller And Earn</a>
+  <a href="support.html" data-i18n="nav_contact">Contact Us</a>
+</div>
+
+<div class="control-hub">
+  <div class="control-layout">
+    <div class="search-wrapper">
+      <input type="text" id="search" placeholder="Search Products..." oninput="handleFilterAndSearch()" data-i18n-holder="search_placeholder">
+    </div>
+    <div class="filter-actions">
+      <select id="sortPrice" onchange="handleFilterAndSearch()">
+        <option value="all" data-i18n="opt_chrono">Sort: Chronological</option>
+        <option value="low" data-i18n="opt_low">Price: Low to High</option>
+        <option value="high" data-i18n="opt_high">Price: High to Low</option>
+      </select>
+      <select id="filterRange" onchange="handleFilterAndSearch()">
+        <option value="all" data-i18n="opt_all_rates">Filter: All Rates</option>
+        <option value="under50" data-i18n="opt_under50">Under $50</option>
+        <option value="above50" data-i18n="opt_50_200">$50 to $200</option>
+        <option value="premium" data-i18n="opt_premium">Premium Over $200</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<div class="stream-monitor" id="streamMonitor" data-i18n="welcome_msg">Welcome To The Kogan Store</div>
+
+<div class="app-container grid-frame">
+  <div class="grid" id="grid">
+    </div>
+</div>
+
+<div class="scroll-top-btn" id="scrollTopBtn" onclick="scrollToTopHead()" aria-label="Scroll to top">
+  <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="12" y1="19" x2="12" y2="5"></line>
+    <polyline points="5 12 12 5 19 12"></polyline>
+  </svg>
+</div>
+
+<a href="support.html" class="floating-support-btn" aria-label="Support">
+  <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+  </svg>
+</a>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getDatabase, ref, get, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBfNKnkuPjWCO-KnqvZrfmrbfC44K0xOY8",
+  authDomain: "koganstoree.firebaseapp.com",
+  databaseURL: "https://koganstoree-default-rtdb.firebaseio.com",
+  projectId: "koganstoree",
+  storageBucket: "koganstoree.firebasestorage.app",
+  messagingSenderId: "166010280262",
+  appId: "1:166010280262:web:a29c6fc7b8251c9997ed47"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+const grid = document.getElementById("grid");
+const streamMonitor = document.getElementById("streamMonitor");
+const scrollTopBtn = document.getElementById("scrollTopBtn");
+
+let masterMemoryPool = []; 
+let renderedVisibleList = []; 
+let totalItemsCount = 0;
+let pointerIndex = 0;
+const batchStepSize = 30;
+let streamingInterval = null;
+let currentLang = "en";
+
+const dictionary = {
+  en: {
+    nav_home: "Home Page",
+    nav_terms: "Terms & Conditions",
+    nav_contact: "Contact Us",
+    nav_seller: "Become A Seller",
+    nav_seller_earn: "Become A Seller And Earn",
+    search_placeholder: "Search Products...",
+    welcome_msg: "Welcome To The Kogan Store",
+    opt_chrono: "Sort: Chronological",
+    opt_low: "Price: Low to High",
+    opt_high: "Price: High to Low",
+    opt_all_rates: "Filter: All Rates",
+    opt_under50: "Under $50",
+    opt_50_200: "$50 to $200",
+    opt_premium: "Premium Over $200",
+    view_btn: "View",
+    empty_msg: "No objects recorded in master cloud cluster.",
+    zero_match: "Zero indexes matched search attributes.",
+    error_db: "Cluster connection denied. Check console routing layers.",
+    freely_msg: "Shop Freely"
+  },
+  ur: {
+    nav_home: "ہوم پیج",
+    nav_terms: "شرائط و ضوابط",
+    nav_contact: "ہم سے رابطہ کریں",
+    nav_seller: "سیلر بنیں",
+    nav_seller_earn: "سیلر بنیں اور کمائیں",
+    search_placeholder: "مصنوعات تلاش کریں...",
+    welcome_msg: "کوگن اسٹور میں خوش آمدید",
+    opt_chrono: "ترتیب: تاریخ کے مطابق",
+    opt_low: "قیمت: کم سے زیادہ",
+    opt_high: "قیمت: زیادہ سے کم",
+    opt_all_rates: "فلٹر: تمام قیمتیں",
+    opt_under50: "50$ سے کم",
+    opt_50_200: "50$ سے 200$ تک",
+    opt_premium: "پریمیم 200$ سے اوپر",
+    view_btn: "دیکھیں",
+    empty_msg: "ماسٹر کلاؤڈ کلسٹر میں کوئی چیز ریکارڈ نہیں کی گئی۔",
+    zero_match: "تلاش کے مطابق کوئی مصنوعات نہیں ملیں۔",
+    error_db: "کلسٹر کنکشن مسترد کر دیا گیا۔ راؤٹنگ لیئرز چیک کریں۔",
+    freely_msg: "آزادانہ خریداری کریں"
+  },
+  hi: {
+    nav_home: "होम पेज",
+    nav_terms: "नियम और शर्तें",
+    nav_contact: "संपर्क करें",
+    nav_seller: "विक्रेता बनें",
+    nav_seller_earn: "विक्रेता बनें और कमाएं",
+    search_placeholder: "उत्पाद खोजें...",
+    welcome_msg: "कोगन स्टोर में आपका स्वागत है",
+    opt_chrono: "क्रमबद्ध करें: कालानुक्रमिक",
+    opt_low: "मूल्य: कम से उच्च",
+    opt_high: "मूल्य: उच्च से कम",
+    opt_all_rates: "फ़िल्टर: सभी दरें",
+    opt_under50: "$50 से कम",
+    opt_50_200: "$50 से $200",
+    opt_premium: "प्रीमियम $200 से अधिक",
+    view_btn: "देखें",
+    empty_msg: "मास्टर क्लाउड क्लस्टर में कोई ऑब्जेक्ट रिकॉर्ड नहीं किया गया।",
+    zero_match: "खोज विशेषताओं से मेल खाने वाले शून्य इंडेक्स।",
+    error_db: "क्लस्टर कनेक्शन अस्वीकार कर दिया गया। रूटिंग परतों की जांच करें।",
+    freely_msg: "स्वतंत्र रूप से खरीदारी करें"
+  },
+  fr: {
+    nav_home: "Page d'accueil",
+    nav_terms: "Conditions Générales",
+    nav_contact: "Contactez-nous",
+    nav_seller: "Devenir Vendeur",
+    nav_seller_earn: "Devenir Vendeur et Gagner",
+    search_placeholder: "Rechercher des produits...",
+    welcome_msg: "Bienvenue sur le magasin Kogan",
+    opt_chrono: "Tri: Chronologique",
+    opt_low: "Prix: Du moins cher au plus cher",
+    opt_high: "Prix: Du plus cher au moins cher",
+    opt_all_rates: "Filtrer: Tous les prix",
+    opt_under50: "Moins de 50 $",
+    opt_50_200: "De 50 $ à 200 $",
+    opt_premium: "Premium plus de 200 $",
+    view_btn: "Voir",
+    empty_msg: "Aucun objet enregistré dans le cluster cloud master.",
+    zero_match: "Zéro index correspondant aux attributs de recherche.",
+    error_db: "Connexion au cluster refusée. Vérifiez les couches de routage.",
+    freely_msg: "Achetez librement"
+  },
+  ar: {
+    nav_home: "الصفحة الرئيسية",
+    nav_terms: "الشروط والأحكام",
+    nav_contact: "اتصل بنا",
+    nav_seller: "كن بائعاً",
+    nav_seller_earn: "كن بائعاً وابدأ الكسب",
+    search_placeholder: "البحث عن المنتجات...",
+    welcome_msg: "مرحباً بكم في متجر كوغان",
+    opt_chrono: "الترتيب: زمني",
+    opt_low: "السعر: من الأقل إلى الأعلى",
+    opt_high: "السعر: من الأعلى إلى الأقل",
+    opt_all_rates: "تصفية: جميع الأسعار",
+    opt_under50: "أقل من 50 $",
+    opt_50_200: "50 $ إلى 200 $",
+    opt_premium: "مميز أكثر من 200 $",
+    view_btn: "عرض",
+    empty_msg: "لم يتم تسجيل أي كائنات في نظام السحابة الرئيسي.",
+    zero_match: "لم تطابق أي عناصر مواصفات البحث الخاصة بك.",
+    error_db: "تم رفض اتصال المجموعة. تحقق من طبقات التوجيه بالوحدة.",
+    freely_msg: "تسوق بحرية"
+  },
+  
+  de: {
+    nav_home: "Startseite",
+    nav_terms: "Allgemeine Geschäftsbedingungen",
+    nav_contact: "Kontakt",
+    nav_seller: "Verkäufer werden",
+    nav_seller_earn: "Verkäufer werden und verdienen",
+    search_placeholder: "Produkte suchen...",
+    welcome_msg: "Willkommen im Kogan Store",
+    opt_chrono: "Sortierung: Chronologisch",
+    opt_low: "Preis: Niedrig bis Hoch",
+    opt_high: "Preis: Hoch bis Niedrig",
+    opt_all_rates: "Filter: Alle Preise",
+    opt_under50: "Unter $50",
+    opt_50_200: "$50 bis $200",
+    opt_premium: "Premium über $200",
+    view_btn: "Ansehen",
+    empty_msg: "Keine Objekte im Master-Cloud-Cluster erfasst.",
+    zero_match: "Keine Indizes stimmten mit den Suchattributen überein.",
+    error_db: "Cluster-Verbindung abgelehnt. Konsolen-Routing-Ebenen prüfen.",
+    freely_msg: "Frei einkaufen"
+  },
+  pt: {
+    nav_home: "Página Inicial",
+    nav_terms: "Termos e Condições",
+    nav_contact: "Contate-nos",
+    nav_seller: "Torne-se um Vendedor",
+    nav_seller_earn: "Torne-se um Vendedor e Ganhe",
+    search_placeholder: "Buscar Produtos...",
+    welcome_msg: "Bem-vindo à Kogan Store",
+    opt_chrono: "Ordenar: Cronológico",
+    opt_low: "Preço: Menor para Maior",
+    opt_high: "Preço: Maior para Menor",
+    opt_all_rates: "Filtro: Todas as Taxas",
+    opt_under50: "Abaixo de $50",
+    opt_50_200: "$50 a $200",
+    opt_premium: "Premium acima de $200",
+    view_btn: "Visualizar",
+    empty_msg: "Nenhum objeto registrado no cluster de nuvem mestre.",
+    zero_match: "Nenhum índice correspondeu aos atributos de busca.",
+    error_db: "Conexão com o cluster negada. Verifique as camadas de roteamento do console.",
+    freely_msg: "Compre Livremente"
+  },
+  ru: {
+    nav_home: "Главная страница",
+    nav_terms: "Условия и положения",
+    nav_contact: "Связаться с нами",
+    nav_seller: "Стать продавцом",
+    nav_seller_earn: "Стать продавцом и зарабатывать",
+    search_placeholder: "Поиск продуктов...",
+    welcome_msg: "Добро пожаловать в Kogan Store",
+    opt_chrono: "Сортировка: Хронологическая",
+    opt_low: "Цена: от низкой к высокой",
+    opt_high: "Цена: от высокой к низкой",
+    opt_all_rates: "Фильтр: Все тарифы",
+    opt_under50: "До $50",
+    opt_50_200: "От $50 до $200",
+    opt_premium: "Премиум свыше $200",
+    view_btn: "Просмотр",
+    empty_msg: "В мастер-кластере облака нет записанных объектов.",
+    zero_match: "Ни один индекс не совпал с атрибутами поиска.",
+    error_db: "Подключение к кластеру отклонено. Проверьте уровни маршрутизации консоли.",
+    freely_msg: "Покупайте свободно"
+  },
+  it: {
+    nav_home: "Pagina Principale",
+    nav_terms: "Termini e Condizioni",
+    nav_contact: "Contatti",
+    nav_seller: "Diventa un Venditore",
+    nav_seller_earn: "Diventa un Venditore e Guadagna",
+    search_placeholder: "Cerca Prodotti...",
+    welcome_msg: "Benvenuto nel Kogan Store",
+    opt_chrono: "Ordina: Cronologico",
+    opt_low: "Prezzo: Crescente",
+    opt_high: "Prezzo: Decrescente",
+    opt_all_rates: "Filtra: Tutte le Tariffe",
+    opt_under50: "Sotto $50",
+    opt_50_200: "Da $50 a $200",
+    opt_premium: "Premium sopra $200",
+    view_btn: "Visualizza",
+    empty_msg: "Nessun oggetto registrato nel cluster cloud master.",
+    zero_match: "Nessun indice ha corrisposto agli attributi di ricerca.",
+    error_db: "Connessione al cluster negata. Controlla i livelli di routing della console.",
+    freely_msg: "Acquista in Libertà"
+  },
+  es: {
+    nav_home: "Página de Inicio",
+    nav_terms: "Términos y Condiciones",
+    nav_contact: "Contáctanos",
+    nav_seller: "Conviértete en Vendedor",
+    nav_seller_earn: "Conviértete en Vendedor y Gana",
+    search_placeholder: "Buscar Productos...",
+    welcome_msg: "Bienvenido a Kogan Store",
+    opt_chrono: "Ordenar: Cronológico",
+    opt_low: "Precio: Menor a Mayor",
+    opt_high: "Precio: Mayor a Menor",
+    opt_all_rates: "Filtro: Todas las Tarifas",
+    opt_under50: "Menos de $50",
+    opt_50_200: "$50 a $200",
+    opt_premium: "Premium más de $200",
+    view_btn: "Ver",
+    empty_msg: "No hay objetos registrados en el cluster de nube maestro.",
+    zero_match: "Cero índices coincidieron con los atributos de búsqueda.",
+    error_db: "Conexión al cluster denegada. Compruebe las capas de enrutamiento de la consola.",
+    freely_msg: "Compre Libremente"
+  },
+  fa: {
+    nav_home: "صفحه اصلی",
+    nav_terms: "شرایط و ضوابط",
+    nav_contact: "تماس با ما",
+    nav_seller: "فروشنده شوید",
+    nav_seller_earn: "فروشنده شوید و کسب درآمد کنید",
+    search_placeholder: "جستجوی محصولات...",
+    welcome_msg: "به فروشگاه Kogan خوش آمدید",
+    opt_chrono: "مرتب‌سازی: زمانی",
+    opt_low: "قیمت: کم به زیاد",
+    opt_high: "قیمت: زیاد به کم",
+    opt_all_rates: "فیلتر: همه نرخ‌ها",
+    opt_under50: "کمتر از ۵۰ دلار",
+    opt_50_200: "۵۰ تا ۲۰۰ دلار",
+    opt_premium: "پریمیوم بالای ۲۰۰ دلار",
+    view_btn: "مشاهده",
+    empty_msg: "هیچ شیئی در کلاستر ابری اصلی ثبت نشده است.",
+    zero_match: "هیچ شاخصی با ویژگی‌های جستجو مطابقت نداشت.",
+    error_db: "اتصال به کلاستر رد شد. لایه‌های مسیریابی کنسول را بررسی کنید.",
+    freely_msg: "با خیال راحت خرید کنید"
+  },
+  zh: {
+    nav_home: "首页",
+    nav_terms: "条款与条件",
+    nav_contact: "联系我们",
+    nav_seller: "成为卖家",
+    nav_seller_earn: "成为卖家并赚取收益",
+    search_placeholder: "搜索产品...",
+    welcome_msg: "欢迎来到 Kogan Store",
+    opt_chrono: "排序：按时间",
+    opt_low: "价格：从低到高",
+    opt_high: "价格：从高到低",
+    opt_all_rates: "筛选：所有费率",
+    opt_under50: "$50 以下",
+    opt_50_200: "$50 至 $200",
+    opt_premium: "高端 $200 以上",
+    view_btn: "查看",
+    empty_msg: "主云集群中未记录任何对象。",
+    zero_match: "没有索引匹配搜索属性。",
+    error_db: "集群连接被拒绝。请检查控制台路由层。",
+    freely_msg: "自由购物"
+  },
+  he: {
+    nav_home: "דף הבית",
+    nav_terms: "תנאים והגבלות",
+    nav_contact: "צור קשר",
+    nav_seller: "הפוך למוכר",
+    nav_seller_earn: "הפוך למוכר והתחל להרוויח",
+    search_placeholder: "חפש מוצרים...",
+    welcome_msg: "ברוכים הבאים ל-Kogan Store",
+    opt_chrono: "מיון: כרונולוגי",
+    opt_low: "מחיר: נמוך לגבוה",
+    opt_high: "מחיר: גבוה לנמוך",
+    opt_all_rates: "מסנן: כל התעריפים",
+    opt_under50: "מתחת ל-$50",
+    opt_50_200: "$50 עד $200",
+    opt_premium: "פרימיום מעל $200",
+    view_btn: "צפה",
+    empty_msg: "לא נרשמו אובייקטים באשכול הענן הראשי.",
+    zero_match: "אף אינדקס לא תאם את מאפייני החיפוש.",
+    error_db: "החיבור לאשכול נדחה. בדוק את שכבות הניתוב של הקונסולה.",
+    freely_msg: "קנה בחופשיות"
+  },
+  ko: {
+    nav_home: "홈 페이지",
+    nav_terms: "이용 약관",
+    nav_contact: "문의하기",
+    nav_seller: "판매자 되기",
+    nav_seller_earn: "판매자가 되어 수익 창출하기",
+    search_placeholder: "상품 검색...",
+    welcome_msg: "Kogan Store에 오신 것을 환영합니다",
+    opt_chrono: "정렬: 시간순",
+    opt_low: "가격: 낮은 순",
+    opt_high: "가격: 높은 순",
+    opt_all_rates: "필터: 모든 요금",
+    opt_under50: "$50 미만",
+    opt_50_200: "$50 ~ $200",
+    opt_premium: "프리미엄 $200 이상",
+    view_btn: "보기",
+    empty_msg: "마스터 클라우드 클러스터에 기록된 객체가 없습니다.",
+    zero_match: "검색 속성과 일치하는 인덱스가 없습니다.",
+    error_db: "클러스터 연결이 거부되었습니다. 콘솔 라우팅 계층을 확인하세요.",
+    freely_msg: "자유롭게 쇼핑하세요"
+  }
+};
+
+window.switchLanguage = function(lang) {
+  currentLang = lang;
+  document.body.dir = (lang === "ur" || lang === "ar") ? "rtl" : "ltr";
+
+  document.querySelectorAll("[data-i18n]").forEach(elem => {
+    const key = elem.getAttribute("data-i18n");
+    if(dictionary[lang][key]) elem.textContent = dictionary[lang][key];
+  });
+
+  document.querySelectorAll("[data-i18n-holder]").forEach(elem => {
+    const key = elem.getAttribute("data-i18n-holder");
+    if(dictionary[lang][key]) elem.placeholder = dictionary[lang][key];
+  });
+
+  handleFilterAndSearch();
+};
+
+window.toggleThemeEngine = function() {
+  const activeTheme = document.documentElement.getAttribute("data-theme") || "dark";
+  const targetTheme = activeTheme === "dark" ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", targetTheme);
+  
+  const icon = document.getElementById("themeIcon");
+  if (targetTheme === "light") {
+    icon.innerHTML = `<circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>`;
+  } else {
+    icon.innerHTML = `<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>`;
+  }
+};
+
+function initFaviconDatabaseSynchronizer() {
+  const faviconRef = ref(db, "settings/favicon");
+  onValue(faviconRef, (snapshot) => {
+    if (snapshot.exists()) {
+      const dbFaviconUrl = snapshot.val();
+      const faviconElement = document.getElementById("dynamicFavicon");
+      if (faviconElement && dbFaviconUrl) {
+        faviconElement.href = dbFaviconUrl;
+      }
+    }
+  });
+}
+
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 800) {
+    scrollTopBtn.classList.add("visible");
+  } else {
+    scrollTopBtn.classList.remove("visible");
+  }
+});
+
+window.scrollToTopHead = function() {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+};
+
+async function bootDatabasePipeline(){
+  try {
+    const snap = await get(ref(db, "products"));
+    if(snap.exists()){
+      const rawData = snap.val();
+      
+      masterMemoryPool = Object.keys(rawData).map(key => ({
+        id: key,
+        title: rawData[key].title || 'Untitled Node',
+        price: parseFloat(rawData[key].price) || 0.00,
+        image: rawData[key].image || ''
+      })).reverse(); 
+
+      totalItemsCount = masterMemoryPool.length;
+      renderedVisibleList = [...masterMemoryPool];
+      
+      streamNextBatch();
+      
+      streamingInterval = setInterval(() => {
+        if (pointerIndex >= renderedVisibleList.length) {
+          clearInterval(streamingInterval);
+          streamMonitor.textContent = dictionary[currentLang].freely_msg;
+        } else {
+          streamNextBatch();
+        }
+      }, 1000);
+
+    } else {
+      streamMonitor.textContent = "";
+      grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;color:var(--muted);font-size:14px;padding:40px 0;">${dictionary[currentLang].empty_msg}</div>`;
+    }
+  } catch(err) {
+    console.error(err);
+    streamMonitor.textContent = "";
+    grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;color:#ef4444;font-size:14px;padding:40px 0;">${dictionary[currentLang].error_db}</div>`;
+  }
+}
+
+function streamNextBatch(){
+  const endpoint = Math.min(pointerIndex + batchStepSize, renderedVisibleList.length);
+  const currentBatchSlice = renderedVisibleList.slice(pointerIndex, endpoint);
+
+  if (currentBatchSlice.length === 0 && pointerIndex === 0) {
+    grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;color:var(--muted);font-size:14px;padding:40px 0;">${dictionary[currentLang].zero_match}</div>`;
+    return;
+  }
+
+  currentBatchSlice.forEach(p => {
+    const card = document.createElement("div");
+    card.className = "card";
+    card.id = `node-${p.id}`;
+    card.onclick = () => location.href = "product.html?id=" + p.id;
+
+    const pseudoRatingCount = Math.floor(180 + (p.price ? p.price * 3.8 : 95));
+
+    card.innerHTML = `
+      <div class="card-img-frame">
+        <img id="img-${p.id}" alt="${p.title}" />
+      </div>
+      <div class="card-body">
+              <div class="title">${p.title}</div>
+        <div class="rating-stars">
+          ⭐⭐⭐⭐•
+          <span class="rating-count">(${pseudoRatingCount})</span>
+        </div>
+        <div class="card-footer">
+          <div class="price">$${p.price.toFixed(2)}</div>
+          <button class="view-action-btn">${dictionary[currentLang].view_btn} ↗</button>
+        </div>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+
+  setTimeout(() => {
+    currentBatchSlice.forEach(p => {
+      const imgNode = document.getElementById(`img-${p.id}`);
+      if(imgNode) {
+        imgNode.src = p.image || 'https://via.placeholder.com/400';
+        imgNode.onload = () => imgNode.classList.add('loaded');
+      }
+    });
+  }, 40);
+
+  pointerIndex = endpoint;
+}
+
+window.handleFilterAndSearch = function(){
+  if(streamingInterval) clearInterval(streamingInterval);
+  grid.innerHTML = "";
+  pointerIndex = 0;
+
+  const searchVal = document.getElementById("search").value.toLowerCase();
+  const priceSort = document.getElementById("sortPrice").value;
+  const rangeFilter = document.getElementById("filterRange").value;
+
+  let trackingArray = masterMemoryPool.filter(p => {
+    const matchSearch = p.title.toLowerCase().includes(searchVal);
+    let matchRange = true;
+
+    if (rangeFilter === "under50") matchRange = p.price < 50;
+    else if (rangeFilter === "above50") matchRange = p.price >= 50 && p.price <= 200;
+    else if (rangeFilter === "premium") matchRange = p.price > 200;
+
+    return matchSearch && matchRange;
+  });
+
+  if (priceSort === "low") {
+    trackingArray.sort((a, b) => a.price - b.price);
+  } else if (priceSort === "high") {
+    trackingArray.sort((a, b) => b.price - a.price);
+  }
+
+  renderedVisibleList = trackingArray;
+  streamNextBatch();
+
+  streamingInterval = setInterval(() => {
+    if (pointerIndex >= renderedVisibleList.length) {
+      clearInterval(streamingInterval);
+      streamMonitor.textContent = dictionary[currentLang].freely_msg;
+    } else {
+      streamNextBatch();
+    }
+  }, 1000);
+}
+
+window.toggleMenuDrawer = function(){
+  document.getElementById("sidebar").classList.toggle("active");
+};
+
+bootDatabasePipeline();
+initFaviconDatabaseSynchronizer();
+</script>
+
+</body>
+</html>
